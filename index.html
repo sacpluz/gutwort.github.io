@@ -10,6 +10,7 @@
 <meta property="og:image" content="bilder/web/teilen-betrieb.jpg">
 <meta property="og:type" content="website">
 <meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="logo/favicon.svg">
 <style>
 @font-face{font-family:"Fraunces";font-style:normal;font-weight:500 600;font-display:swap;src:url("fonts/fraunces-latin.woff2") format("woff2")}
 @font-face{font-family:"Inter";font-style:normal;font-weight:400 600;font-display:swap;src:url("fonts/inter-latin.woff2") format("woff2")}
@@ -52,7 +53,8 @@ h2.t{font-size:clamp(1.6rem,3.2vw,2.15rem);line-height:1.15}
 /* Kopf */
 .kopf{position:sticky;top:0;z-index:50;background:rgba(252,251,249,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--grau-300)}
 .kopf__in{display:flex;align-items:center;gap:1.5rem;padding:.85rem var(--spur);max-width:1120px;margin:0 auto}
-.marke{font-family:var(--serif);font-weight:600;font-size:1.35rem;color:var(--gruen-900);text-decoration:none;letter-spacing:-.01em}
+.marke{display:inline-flex;align-items:center;text-decoration:none}
+.marke img{display:block;height:1.75rem;width:auto}
 .nav{display:none;gap:.25rem;margin-left:auto;font-size:.9375rem}
 .nav a{color:var(--grau-600);text-decoration:none;padding:.5rem .85rem;border-radius:999px;font-weight:500}
 .nav a:hover{color:var(--gruen-900);background:var(--gruen-100)}
@@ -348,7 +350,7 @@ h2.t{font-size:clamp(1.6rem,3.2vw,2.15rem);line-height:1.15}
 .fuss__in{display:flex;flex-wrap:wrap;gap:1rem 2rem;align-items:center}
 .fuss a{color:#C4D3CC;text-decoration:none}
 .fuss a:hover{color:#fff}
-.fuss .marke{color:#fff;font-size:1.15rem}
+.fuss .marke img{height:1.5rem}
 
 /* Cockpit-Ansicht */
 .cockpit{margin-top:2.5rem;background:var(--papier);border:1px solid var(--grau-300);border-radius:var(--r-gross);overflow:hidden;box-shadow:var(--schatten)}
@@ -408,7 +410,7 @@ h2.t{font-size:clamp(1.6rem,3.2vw,2.15rem);line-height:1.15}
 
 <header class="kopf">
   <div class="kopf__in">
-    <a class="marke" href="#top">Gutwort</a>
+    <a class="marke" href="#top"><img src="logo/gutwort-logo.svg" alt="Gutwort" width="1040" height="260"></a>
     <nav class="nav">
       <a href="#leistungen">Leistungen</a>
       <a href="#ablauf">So läuft das</a>
@@ -1246,7 +1248,7 @@ h2.t{font-size:clamp(1.6rem,3.2vw,2.15rem);line-height:1.15}
 
 <footer class="fuss">
   <div class="wrap fuss__in">
-    <span class="marke">Gutwort</span>
+    <span class="marke"><img src="logo/gutwort-white.svg" alt="Gutwort" width="1040" height="260"></span>
     <span>Bewertungen von Kunden, die Sie schon haben.</span>
     <span style="margin-left:auto;display:flex;gap:1.25rem"><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></span>
   </div>
