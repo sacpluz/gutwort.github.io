@@ -1,0 +1,9 @@
+Erste Bildserie vom 31.08.2026, ersetzt.
+
+Grund: Bei der Erzeugung lief die Gutwort-Palette als Farbparameter mit. Recraft hat
+das zu woertlich genommen, dadurch liegt auf allen Bildern ein Gruenstich, beim
+Handy-Motiv sogar ein Neongruen im Hintergrund. Genau das schliesst design.md aus.
+
+Die zweite Serie entstand ohne Farbparameter, stattdessen mit der Farbstimmung in Worten
+im Prompt. Falls die neue Serie in einem Motiv schwaecher ist, kann hier nachgeschaut
+werden, aber ungefiltert sollte keins dieser Bilder auf die Seite.
