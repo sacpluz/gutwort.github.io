@@ -1,0 +1,1270 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gutwort v02: mehr Google-Bewertungen von Kunden, die Sie schon haben</title>
+<meta name="description" content="Gutwort hilft zufriedenen Kunden, ihre Bewertung tatsächlich zu schreiben, per Auswahl oder Sprache. Dazu Auswertungen nach Leistung und Mitarbeiter. DSGVO-konform, Server in Deutschland.">
+<meta property="og:title" content="Gute Arbeit spricht sich herum. Mit Gutwort auch online.">
+<meta property="og:description" content="Gutwort hilft zufriedenen Kunden, ihre Bewertung tatsächlich zu schreiben. DSGVO-konform, Server in Deutschland.">
+<meta property="og:image" content="bilder/web/teilen-betrieb.jpg">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap">
+<style>
+/* HINWEIS: Schriften kommen hier noch von Google. Für die Laravel-App über Bunny
+   laden oder selbst hosten, siehe design.md Abschnitt 4. */
+:root{
+  --gruen-900:#12312A; --gruen-700:#1B6B4A; --gruen-500:#35A06B; --gruen-300:#9CCFB5;
+  --gruen-100:#E4F2EA; --gruen-50:#F2F8F4;
+  --sand-100:#F6F1E8; --sand-200:#EDE4D6;
+  --bernstein:#E8A317; --rot-600:#B4432E; --rot-50:#FBEFEC;
+  --karte-100:#EDF1F7; --karte-300:#C7D0DE;
+  --papier:#FCFBF9; --grau-900:#1C1B19; --grau-600:#57544E; --grau-300:#D9D5CE;
+  --limone:#C6F24E; --limone-text:#1D3A17;
+  --serif:"Fraunces","Iowan Old Style",Georgia,serif;
+  --sans:"Inter","Helvetica Neue",Arial,sans-serif;
+  --spur:clamp(1.25rem,4vw,4rem);
+  --schatten:0 6px 20px rgba(18,49,42,.10);
+  --r-btn:999px; --r-karte:18px; --r-gross:26px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{margin:0;background:var(--papier);color:var(--grau-900);font-family:var(--sans);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4,p{margin:0}
+h1,h2,h3{font-family:var(--serif);font-weight:600;text-wrap:balance;color:var(--gruen-900)}
+ul{margin:0;padding:0;list-style:none}
+img{max-width:100%;height:auto;display:block}
+a{color:var(--gruen-700)}
+:focus-visible{outline:2px solid var(--gruen-700);outline-offset:2px;border-radius:4px}
+
+.tab{font-variant-numeric:tabular-nums}
+.wrap{max-width:1120px;margin:0 auto;padding:0 var(--spur)}
+.eng{max-width:65ch}
+.band{padding:clamp(3rem,7vw,5.5rem) 0}
+.b-gruen{background:var(--gruen-50)}
+.b-sand{background:var(--sand-100)}
+.label{display:inline-flex;align-items:center;font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gruen-900);background:var(--limone);padding:.4rem .9rem;border-radius:999px;margin-bottom:1.1rem}
+.werteband .label{background:transparent;border:1px solid rgba(198,242,78,.55);color:var(--limone)}
+h2.t{font-size:clamp(1.6rem,3.2vw,2.15rem);line-height:1.15}
+.vor{margin-top:1rem;color:var(--grau-600);font-size:1.0625rem}
+
+/* Kopf */
+.kopf{position:sticky;top:0;z-index:50;background:rgba(252,251,249,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--grau-300)}
+.kopf__in{display:flex;align-items:center;gap:1.5rem;padding:.85rem var(--spur);max-width:1120px;margin:0 auto}
+.marke{font-family:var(--serif);font-weight:600;font-size:1.35rem;color:var(--gruen-900);text-decoration:none;letter-spacing:-.01em}
+.nav{display:none;gap:.25rem;margin-left:auto;font-size:.9375rem}
+.nav a{color:var(--grau-600);text-decoration:none;padding:.5rem .85rem;border-radius:999px;font-weight:500}
+.nav a:hover{color:var(--gruen-900);background:var(--gruen-100)}
+@media(min-width:840px){.nav{display:flex}}
+.kopf .btn{margin-left:auto}
+@media(min-width:840px){.kopf .btn{margin-left:0}}
+
+.btn{display:inline-block;font-weight:700;font-size:.9375rem;border-radius:var(--r-btn);padding:.85rem 1.5rem;border:1px solid transparent;text-decoration:none;cursor:pointer;transition:background .15s,color .15s,border-color .15s,transform .15s}
+.btn-1{background:var(--gruen-900);color:#fff;box-shadow:0 6px 16px rgba(18,49,42,.22)}
+.btn-1:hover{background:var(--gruen-700);transform:translateY(-1px)}
+.btn-2{background:#fff;color:var(--gruen-900);border-color:var(--grau-300)}
+.btn-2:hover{border-color:var(--gruen-900);transform:translateY(-1px)}
+.btn-limone{background:var(--limone);color:var(--limone-text);box-shadow:0 6px 16px rgba(198,242,78,.35)}
+.btn-limone:hover{background:#B7E63C;transform:translateY(-1px)}
+.btn-klein{padding:.55rem 1.05rem;font-size:.875rem}
+.knoepfe{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1.75rem}
+
+/* Hero */
+.hero{padding:clamp(2.5rem,6vw,4.5rem) 0 clamp(3rem,7vw,5rem)}
+.hero__gitter{display:grid;gap:clamp(2rem,5vw,3.5rem);align-items:center}
+@media(min-width:960px){.hero__gitter{grid-template-columns:1fr 1fr}}
+.hero h1{font-size:clamp(2.1rem,5vw,3.3rem);line-height:1.08;letter-spacing:-.015em}
+.hero .vor{font-size:1.125rem;max-width:46ch}
+.vertrauen{margin-top:1.75rem;display:flex;flex-wrap:wrap;gap:.5rem .9rem;font-size:.875rem;color:var(--grau-600)}
+.vertrauen span{display:flex;align-items:center;gap:.4rem}
+.punkt{width:5px;height:5px;border-radius:50%;background:var(--gruen-500);flex:none}
+
+.figur{background:#fff;border:1px solid var(--grau-300);border-radius:var(--r-gross);padding:clamp(.9rem,2vw,1.4rem)}
+.figur svg{display:block;width:100%;height:auto}
+.bu{margin-top:.9rem;font-size:.8125rem;color:var(--grau-600);text-align:center}
+
+/* Hero-Leistungskarte */
+.buehne{position:relative;padding:clamp(1rem,3vw,2.2rem) clamp(.5rem,2.4vw,1.8rem)}
+.panel{
+  position:relative;border-radius:22px;padding:clamp(1.1rem,2.4vw,1.5rem);
+  background:linear-gradient(168deg,#FFFFFF 0%,var(--gruen-50) 100%);
+  border:1px solid var(--grau-300);box-shadow:0 18px 46px rgba(18,49,42,.13);
+}
+.p-kopf{display:flex;align-items:center;gap:.75rem;margin-bottom:.9rem;padding-right:9rem;min-height:1.75rem}
+.p-kopf::after{content:"";flex:1}
+.p-live{display:flex;align-items:center;gap:.5rem;font-size:.6875rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gruen-700)}
+.p-live__punkt{width:7px;height:7px;border-radius:50%;background:var(--gruen-500);box-shadow:0 0 0 4px rgba(53,160,107,.16);flex:none}
+.p-zeit{font-size:.75rem;color:var(--grau-600)}
+.p-betrieb{display:flex;align-items:center;gap:.85rem;padding:.85rem .95rem;border-radius:14px;background:#fff;border:1px solid var(--grau-300)}
+.p-logo{width:44px;height:44px;border-radius:12px;flex:none;display:flex;align-items:center;justify-content:center;background:var(--gruen-700)}
+.p-logo svg{display:block}
+.p-btext{min-width:0;flex:1}
+.p-bname{display:block;font-size:1rem;font-weight:600;color:var(--gruen-900);line-height:1.25}
+.p-bzus{display:flex;align-items:center;gap:.3rem;font-size:.8125rem;color:var(--grau-600);margin-top:.05rem}
+.p-bzus svg{display:block;flex:none}
+.p-bzahl{flex:none;text-align:right}
+.p-bzahl__wert{display:block;font-family:var(--serif);font-weight:600;font-size:2.05rem;line-height:1;color:var(--gruen-700);letter-spacing:-.02em}
+.p-bzahl__was{display:block;font-size:.6875rem;font-weight:600;letter-spacing:.06em;color:var(--grau-600);margin-top:.25rem}
+.p-kacheln{display:grid;gap:.65rem;grid-template-columns:repeat(3,1fr);margin-top:.65rem}
+.p-kachel{padding:.8rem .85rem;border-radius:13px;background:#fff;border:1px solid var(--grau-300)}
+.p-kachel__was{display:block;font-size:.75rem;color:var(--grau-600)}
+.p-kachel__wert{display:block;font-size:1.5rem;font-weight:700;color:var(--gruen-900);line-height:1.1;margin-top:.2rem;letter-spacing:-.02em}
+.p-kachel__zus{display:block;font-size:.75rem;font-weight:600;color:var(--gruen-700);margin-top:.25rem}
+.p-block{margin-top:.65rem;padding:.95rem 1rem;border-radius:14px;background:#fff;border:1px solid var(--grau-300)}
+.p-block__kopf{display:flex;justify-content:space-between;align-items:baseline;gap:1rem;margin-bottom:.75rem}
+.p-block__titel{font-size:.8125rem;font-weight:600;color:var(--gruen-900)}
+.p-block__zus{font-size:.6875rem;color:var(--grau-600)}
+.p-leute{display:flex;flex-direction:column;gap:.55rem}
+.p-person{display:grid;grid-template-columns:1fr auto;gap:.2rem .6rem;align-items:center}
+.p-person__name{font-size:.8125rem;color:var(--grau-900)}
+.p-person__zahl{font-size:.8125rem;font-weight:600;color:var(--gruen-900);font-variant-numeric:tabular-nums}
+.p-person__balken{grid-column:1 / -1;height:6px;border-radius:3px;background:var(--gruen-50);position:relative}
+.p-person__balken::after{content:"";position:absolute;inset:0 auto 0 0;border-radius:3px;width:var(--w);background:var(--f)}
+.p-chips{display:flex;flex-wrap:wrap;gap:.4rem}
+.p-chip{display:inline-flex;align-items:center;gap:.4rem;padding:.34rem .62rem;border-radius:999px;font-size:.75rem;color:var(--grau-900);background:var(--gruen-50);border:1px solid var(--gruen-100)}
+.p-chip__zahl{font-weight:700;color:var(--gruen-900);font-variant-numeric:tabular-nums}
+.p-chip--stark{background:var(--limone);border-color:var(--limone)}
+.p-chip--stark .p-chip__zahl,.p-chip--stark{color:var(--limone-text)}
+.p-chip--kritik{background:var(--rot-50);border-color:#E7C3B9;color:var(--rot-600)}
+.p-chip--kritik .p-chip__zahl{color:var(--rot-600)}
+.p-merk{margin-top:.75rem;font-size:.8125rem;color:var(--grau-600)}
+.p-merk strong{font-weight:600;color:var(--gruen-900)}
+.blase{
+  position:absolute;display:flex;align-items:center;gap:.65rem;
+  padding:.7rem .85rem;border-radius:13px;background:#fff;
+  border:1px solid var(--grau-300);box-shadow:0 10px 26px rgba(18,49,42,.14);
+}
+.blase__ic{width:28px;height:28px;border-radius:9px;background:var(--gruen-100);flex:none;display:flex;align-items:center;justify-content:center}
+.blase__ic svg{display:block}
+.blase__text{min-width:0}
+.blase__titel{display:block;font-size:.8125rem;font-weight:600;color:var(--gruen-900);line-height:1.25}
+.blase__zus{display:block;font-size:.6875rem;color:var(--grau-600)}
+.blase--1{top:calc(clamp(1rem,3vw,2.2rem) - .7rem);right:-.4rem}
+.blase--2{bottom:0;left:-.5rem}
+@media(max-width:620px){.blase{position:static;margin-top:.6rem}}
+
+/* Foto mit eingesetztem Screen */
+.geraet{position:relative;border-radius:var(--r-gross);overflow:hidden;background:var(--sand-200)}
+.geraet img.foto{width:100%;display:block}
+/* Feinjustage der Bildschirmfläche: die vier Werte je Motiv anpassen. */
+.geraet__screen{
+  position:absolute;overflow:hidden;background:#fff;
+  left:var(--sx);top:var(--sy);width:var(--sw);height:var(--sh);
+  transform:rotate(var(--sr,0deg));transform-origin:center;
+}
+.geraet__screen svg{width:100%;height:100%;display:block}
+.geraet--handy{--sx:38.3%;--sy:13.8%;--sw:23.3%;--sh:74.8%;--sr:0deg}
+
+/* Problem */
+.problem__liste{margin-top:2rem;display:flex;flex-direction:column;gap:1.5rem;max-width:60ch}
+.problem__liste p{font-size:1.0625rem;line-height:1.55}
+.problem__liste p:first-child{font-size:1.25rem;color:var(--gruen-900)}
+.brueckensatz{margin-top:2.5rem;font-family:var(--serif);font-size:clamp(1.15rem,2.4vw,1.5rem);color:var(--gruen-700)}
+
+/* Schritte */
+.schritte{margin-top:2.5rem;display:grid;gap:1.25rem}
+@media(min-width:760px){.schritte{grid-template-columns:repeat(3,1fr)}}
+.schritt{background:#fff;border:2px solid var(--gruen-900);border-radius:var(--r-karte);padding:1.5rem;box-shadow:0 6px 0 var(--gruen-900)}
+.schritt__kopf{display:flex;align-items:center;gap:.85rem;margin-bottom:.9rem}
+.schritt__nr{font-family:var(--serif);font-size:2rem;line-height:1;color:var(--gruen-500);font-variant-numeric:tabular-nums}
+
+/* Icons: ein Stil auf der ganzen Seite, 22px, Linie 1.7, keine Fläche */
+.ic{
+  width:42px;height:42px;border-radius:12px;flex:none;
+  background:var(--gruen-100);color:var(--gruen-700);
+  display:flex;align-items:center;justify-content:center;
+}
+.ic svg{display:block;width:22px;height:22px}
+.schritt h3{font-size:1.15rem;margin-bottom:.5rem}
+.schritt p{color:var(--grau-600);font-size:.9375rem}
+.aufwand{margin-top:1.5rem;padding:1rem 1.25rem;background:var(--gruen-100);border-radius:var(--r-karte);font-size:.9375rem;color:var(--gruen-900)}
+
+/* Zahlenband, kräftige Kacheln */
+.zahlenband{background:var(--gruen-900)}
+.zahlen{display:grid;gap:1rem;grid-template-columns:1fr}
+@media(min-width:700px){.zahlen{grid-template-columns:repeat(3,1fr)}}
+.zahl-kachel{border-radius:var(--r-karte);padding:1.75rem 1.5rem}
+.zahl-kachel:nth-child(1){background:var(--limone);color:var(--limone-text)}
+.zahl-kachel:nth-child(2){background:#fff;color:var(--gruen-900)}
+.zahl-kachel:nth-child(3){background:transparent;color:#fff;border:2px solid rgba(255,255,255,.28)}
+.zahl-kachel strong{display:block;font-family:var(--serif);font-weight:600;font-size:clamp(2.4rem,5vw,3.2rem);line-height:1;letter-spacing:-.02em}
+.zahl-kachel span{display:block;margin-top:.6rem;font-size:.9375rem}
+.zahl-kachel:nth-child(3) span{color:#C4D3CC}
+
+/* Leistungen */
+.leistung{display:grid;gap:clamp(1.5rem,4vw,3rem);align-items:center;padding:clamp(1.75rem,4vw,2.5rem) 0}
+@media(min-width:900px){.leistung{grid-template-columns:1fr 1fr}.leistung--dreh .leistung__text{order:2}}
+.leistung h3{font-size:clamp(1.3rem,2.6vw,1.65rem);margin-bottom:.75rem}
+.leistung p{color:var(--grau-600)}
+.bruecke{padding:1.25rem 0;border-top:1px solid var(--grau-300);font-family:var(--serif);font-size:1.0625rem;color:var(--gruen-900);max-width:58ch}
+
+/* USP */
+.usp__liste{margin-top:1.75rem;display:flex;flex-direction:column;gap:1rem;max-width:62ch}
+.usp__liste li{display:flex;gap:.75rem;align-items:flex-start}
+.usp__liste svg{flex:none;margin-top:.35rem}
+.pointe{margin-top:2rem;padding:1.25rem 1.5rem;border-left:3px solid var(--gruen-500);background:#fff;border-radius:0 var(--r-karte) var(--r-karte) 0;font-family:var(--serif);font-size:1.125rem;color:var(--gruen-900);max-width:56ch}
+.zweiter-usp{margin-top:3rem;padding-top:2.5rem;border-top:1px solid var(--grau-300)}
+
+/* Für wen */
+.waage{margin-top:2.25rem;display:grid;gap:1.25rem}
+@media(min-width:820px){.waage{grid-template-columns:1fr 1fr}}
+.spalte{border-radius:var(--r-karte);padding:1.75rem}
+.spalte--ja{background:var(--gruen-900);color:#fff}
+.spalte--ja h3{color:var(--limone)}
+.spalte--ja li strong{color:#fff}
+.spalte--ja li span{color:#C4D3CC}
+.spalte--nein{background:#fff;border:2px solid var(--grau-300)}
+.spalte h3{font-family:var(--sans);font-size:.8125rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.15rem}
+.spalte--ja h3{color:var(--gruen-700)}
+.spalte--nein h3{color:var(--rot-600)}
+.spalte li{display:flex;gap:.7rem;margin-bottom:1rem;font-size:.9375rem;line-height:1.5}
+.spalte li:last-child{margin-bottom:0}
+.spalte li svg{flex:none;margin-top:.25rem}
+.spalte li strong{display:block;color:var(--gruen-900)}
+.spalte--ja li strong{color:#fff}
+
+.branchen{margin-top:2.25rem;display:grid;gap:1.25rem}
+@media(min-width:640px){.branchen{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1000px){.branchen{grid-template-columns:repeat(4,1fr)}}
+.branche{background:#fff;border:2px solid var(--grau-300);border-radius:var(--r-karte);overflow:hidden;display:flex;flex-direction:column;transition:border-color .15s,transform .15s}
+.branche:hover{border-color:var(--gruen-900);transform:translateY(-2px)}
+.branche img{aspect-ratio:4/3;object-fit:cover;width:100%}
+.branche__text{padding:1.15rem 1.25rem 1.35rem}
+.branche h4{font-family:var(--serif);font-weight:600;font-size:1.0625rem;color:var(--gruen-900);margin-bottom:.35rem}
+.branche p{font-size:.875rem;color:var(--grau-600);line-height:1.5}
+
+/* So arbeiten wir */
+.arbeit{margin-top:2.25rem;display:grid;gap:1.5rem}
+@media(min-width:820px){.arbeit{grid-template-columns:repeat(2,1fr)}}
+.szene{display:flex;flex-direction:column;gap:1rem}
+.szene__bild{
+  position:relative;aspect-ratio:3/2;border-radius:var(--r-karte);overflow:hidden;
+  background:var(--sand-200);border:1px dashed #C6B79B;
+  display:flex;flex-direction:column;justify-content:center;gap:.45rem;
+  padding:1.5rem;color:#6B5B3E;
+}
+.szene__bild img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.szene__marke{font-size:.6875rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.szene__brief{font-size:.875rem;line-height:1.5}
+.szene__nr{
+  position:absolute;top:.75rem;right:.9rem;font-family:var(--serif);font-size:1.5rem;
+  color:#C6B79B;font-variant-numeric:tabular-nums;
+}
+.szene h3{font-size:1.15rem;margin-bottom:.4rem}
+.szene p{font-size:.9375rem;color:var(--grau-600)}
+
+/* Referenzen, noch Platzhalter */
+.platzhalter-warnung{
+  display:flex;gap:.75rem;align-items:flex-start;margin-top:1.5rem;
+  padding:.9rem 1.1rem;border-radius:var(--r-karte);
+  background:repeating-linear-gradient(135deg,var(--sand-100),var(--sand-100) 10px,var(--sand-200) 10px,var(--sand-200) 20px);
+  border:1px dashed #C6B79B;font-size:.875rem;color:#6B5B3E;
+}
+.platzhalter-warnung strong{font-weight:600;color:#4A3F2A}
+.logoleiste{margin-top:2rem;display:grid;gap:.85rem;grid-template-columns:repeat(2,1fr)}
+@media(min-width:720px){.logoleiste{grid-template-columns:repeat(5,1fr)}}
+.logoplatz{
+  height:64px;border-radius:12px;border:1px dashed var(--grau-300);background:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.75rem;color:var(--grau-600);text-align:center;padding:.5rem;
+}
+.faelle{margin-top:1.5rem;display:grid;gap:1.25rem}
+@media(min-width:820px){.faelle{grid-template-columns:repeat(3,1fr)}}
+.fall{
+  background:#fff;border:1px dashed var(--grau-300);border-radius:var(--r-karte);
+  padding:1.5rem;display:flex;flex-direction:column;gap:1rem;
+}
+.fall__kopf{display:flex;align-items:center;gap:.75rem}
+.fall__logo{
+  width:38px;height:38px;border-radius:10px;flex:none;background:var(--sand-100);
+  border:1px dashed var(--grau-300);
+}
+.fall__wer{min-width:0}
+.fall__name{display:block;font-size:.9375rem;font-weight:600;color:var(--gruen-900)}
+.fall__branche{display:block;font-size:.8125rem;color:var(--grau-600)}
+.fall__zahl{display:flex;align-items:baseline;gap:.55rem;flex-wrap:wrap}
+.fall__von{font-family:var(--serif);font-size:1.5rem;color:var(--grau-300);font-variant-numeric:tabular-nums}
+.fall__pfeil{color:var(--grau-300)}
+.fall__nach{font-family:var(--serif);font-weight:600;font-size:2.25rem;line-height:1;color:var(--gruen-700);font-variant-numeric:tabular-nums}
+.fall__was{font-size:.8125rem;color:var(--grau-600)}
+.fall__zitat{font-size:.9375rem;color:var(--grau-600);font-style:italic;border-left:2px solid var(--gruen-100);padding-left:.9rem}
+.fall__fuss{margin-top:auto;font-size:.75rem;color:var(--grau-600);display:flex;gap:.5rem;align-items:center}
+.fall__sterne{display:flex;gap:1px}
+
+/* Vertrauensband */
+.drei{margin-top:2rem;display:grid;gap:1.5rem}
+@media(min-width:800px){.drei{grid-template-columns:repeat(3,1fr)}}
+.drei h3{font-size:1.125rem;margin-bottom:.5rem}
+.drei p{font-size:.9375rem;color:var(--grau-600)}
+
+/* Werte, dunkles Band mit Bild */
+.werteband{background:var(--gruen-900);color:#C4D3CC;position:relative;overflow:hidden}
+.werteband__bild{position:absolute;inset:0}
+.werteband__bild img{width:100%;height:100%;object-fit:cover;opacity:.22}
+.werteband__bild::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,var(--gruen-900) 42%,rgba(18,49,42,.72) 100%)}
+.werteband .wrap{position:relative;z-index:1}
+.werteband h2,.werteband h3{color:#fff}
+.werteband .label{color:var(--gruen-500)}
+.werteband .vor{color:#C4D3CC}
+.werte{margin-top:2.25rem;display:grid;gap:1.5rem}
+@media(min-width:820px){.werte{grid-template-columns:repeat(2,1fr)}}
+.wert{border-top:1px solid rgba(255,255,255,.18);padding-top:1.25rem}
+.wert h3{font-size:1.15rem;margin-bottom:.5rem}
+.wert p{font-size:.9375rem}
+.schluss-werte{margin-top:2.5rem;font-family:var(--serif);font-size:clamp(1.1rem,2.2vw,1.35rem);color:#fff;max-width:58ch;line-height:1.4}
+
+/* Über uns */
+.koepfe{margin-top:2rem;display:grid;gap:1.5rem}
+@media(min-width:760px){.koepfe{grid-template-columns:1fr 1fr}}
+.kopfkarte{display:flex;gap:1.15rem;align-items:flex-start}
+.portrait{width:76px;height:76px;border-radius:50%;flex:none;background:var(--sand-200);border:1px dashed var(--grau-300);display:flex;align-items:center;justify-content:center;font-size:.625rem;color:var(--grau-600);text-align:center;padding:.4rem;line-height:1.25}
+.kopfkarte h3{font-size:1.125rem;margin-bottom:.3rem}
+.kopfkarte p{font-size:.9375rem;color:var(--grau-600)}
+
+/* FAQ */
+.faq{margin-top:2rem;max-width:70ch}
+.faq details{border-bottom:1px solid var(--grau-300)}
+.faq summary{cursor:pointer;padding:1.15rem 2rem 1.15rem 0;position:relative;list-style:none;font-family:var(--serif);font-weight:600;font-size:1.0625rem;color:var(--gruen-900)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"";position:absolute;right:.35rem;top:1.5rem;width:9px;height:9px;border-right:2px solid var(--gruen-700);border-bottom:2px solid var(--gruen-700);transform:rotate(45deg);transition:transform .2s}
+.faq details[open] summary::after{transform:rotate(-135deg)}
+.faq p{padding:0 0 1.25rem;color:var(--grau-600);font-size:.9375rem;max-width:62ch}
+
+/* Abschluss */
+.abschluss{display:grid;gap:2.5rem;align-items:start}
+@media(min-width:900px){.abschluss{grid-template-columns:1fr 1fr}}
+.formular{background:#fff;border:1px solid var(--grau-300);border-radius:var(--r-gross);padding:clamp(1.5rem,3vw,2rem)}
+.feld{display:flex;flex-direction:column;gap:.35rem;margin-bottom:1.15rem}
+.feld label{font-size:.875rem;font-weight:600;color:var(--gruen-900)}
+.feld input{font-family:var(--sans);font-size:1rem;padding:.7rem .85rem;border:1px solid var(--grau-300);border-radius:var(--r-btn);background:var(--papier);color:var(--grau-900)}
+.feld input:focus{outline:2px solid var(--gruen-700);outline-offset:1px;border-color:transparent}
+.feld small{font-size:.8125rem;color:var(--grau-600)}
+.zustimmung{display:flex;gap:.6rem;align-items:flex-start;font-size:.8125rem;color:var(--grau-600);margin-bottom:1.25rem}
+.zustimmung input{margin-top:.2rem;accent-color:var(--gruen-700)}
+.formular .btn{width:100%;text-align:center;border:0}
+
+.fuss{background:var(--gruen-900);color:#9FB5AC;padding:2.5rem 0;font-size:.875rem}
+.fuss__in{display:flex;flex-wrap:wrap;gap:1rem 2rem;align-items:center}
+.fuss a{color:#C4D3CC;text-decoration:none}
+.fuss a:hover{color:#fff}
+.fuss .marke{color:#fff;font-size:1.15rem}
+
+/* Cockpit-Ansicht */
+.cockpit{margin-top:2.5rem;background:var(--papier);border:1px solid var(--grau-300);border-radius:var(--r-gross);overflow:hidden;box-shadow:var(--schatten)}
+.cockpit__leiste{display:flex;align-items:center;gap:.45rem;padding:.7rem 1rem;background:#fff;border-bottom:1px solid var(--grau-300)}
+.cockpit__leiste i{width:9px;height:9px;border-radius:50%;background:var(--karte-300)}
+.cockpit__leiste i:first-child{background:var(--bernstein)}
+.cockpit__leiste span{margin-left:.75rem;font-size:.75rem;color:var(--grau-600)}
+.cockpit__in{display:grid;grid-template-columns:1fr}
+@media(min-width:900px){.cockpit__in{grid-template-columns:200px 1fr}}
+.ck-seite{background:var(--gruen-900);color:#B9CCC3;padding:1.1rem 0;display:none}
+@media(min-width:900px){.ck-seite{display:block}}
+.ck-seite b{display:block;font-family:var(--serif);font-weight:600;font-size:1.05rem;color:#fff;padding:0 1.1rem 1rem}
+.ck-seite a{display:block;padding:.42rem 1.1rem;color:#B9CCC3;text-decoration:none;font-size:.875rem}
+.ck-seite a.an{color:#fff;background:rgba(53,160,107,.18);box-shadow:inset 3px 0 0 var(--gruen-500)}
+.ck-seite small{display:block;font-size:.6875rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#6E8B80;padding:.9rem 1.1rem .3rem}
+.ck-seite .tief a{padding-left:2.1rem;font-size:.8125rem}
+.ck-inhalt{padding:1.25rem}
+.ck-kopf{display:flex;flex-wrap:wrap;gap:.6rem;align-items:baseline;justify-content:space-between;margin-bottom:1.1rem}
+.ck-kopf h3{font-size:1.2rem;margin:0}
+.ck-kopf em{font-style:normal;font-size:.8125rem;color:var(--grau-600)}
+.ck-zahlen{display:grid;gap:.7rem;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));margin-bottom:.7rem}
+.ck-zahl{border-radius:12px;padding:.9rem 1rem}
+.ck-zahl:nth-child(1){background:var(--gruen-100)}
+.ck-zahl:nth-child(2){background:var(--sand-200)}
+.ck-zahl:nth-child(3){background:var(--gruen-900);color:#fff}
+.ck-zahl u{display:block;text-decoration:none;font-size:.75rem;opacity:.85}
+.ck-zahl strong{display:block;font-family:var(--serif);font-weight:600;font-size:1.9rem;line-height:1.05;margin-top:.2rem;font-variant-numeric:tabular-nums}
+.ck-zahl:nth-child(1) strong,.ck-zahl:nth-child(1) u{color:var(--gruen-900)}
+.ck-zahl:nth-child(2) strong,.ck-zahl:nth-child(2) u{color:#4A3F2A}
+.ck-zahl s{display:block;text-decoration:none;font-size:.75rem;opacity:.72;margin-top:.1rem}
+.ck-gitter{display:grid;gap:.7rem;grid-template-columns:1fr}
+@media(min-width:760px){.ck-gitter{grid-template-columns:1.3fr 1fr}}
+.ck-karte{background:#fff;border:1px solid var(--grau-300);border-radius:12px;padding:1rem 1.1rem}
+.ck-karte h4{font-family:var(--serif);font-weight:600;font-size:.9375rem;color:var(--gruen-900);margin:0 0 .85rem}
+.ck-stufe{display:grid;grid-template-columns:1fr auto;gap:.25rem .75rem;margin-bottom:.6rem}
+.ck-stufe span{font-size:.8125rem;color:var(--grau-600)}
+.ck-stufe b{font-size:.8125rem;color:var(--gruen-900);font-variant-numeric:tabular-nums}
+.ck-stufe i{grid-column:1 / -1;height:8px;border-radius:4px;background:var(--gruen-50);display:block;position:relative}
+.ck-stufe i::after{content:"";position:absolute;inset:0 auto 0 0;border-radius:4px;width:var(--w);background:var(--f)}
+.ck-lob{display:flex;flex-direction:column;gap:.65rem;margin-bottom:.9rem}
+.ck-lob div{display:grid;grid-template-columns:1fr auto;gap:.2rem .5rem}
+.ck-lob span{font-size:.8125rem;color:var(--grau-900)}
+.ck-lob b{font-size:.8125rem;color:var(--gruen-900);font-variant-numeric:tabular-nums}
+.ck-lob i{grid-column:1 / -1;height:6px;border-radius:3px;background:var(--gruen-50);display:block;position:relative}
+.ck-lob i::after{content:"";position:absolute;inset:0 auto 0 0;border-radius:3px;width:var(--w);background:var(--f)}
+.ck-satz{font-size:.8125rem;color:var(--grau-600);margin-top:.2rem}
+.ck-satz b{color:var(--gruen-900)}
+.ck-satz.kritik{color:var(--rot-600)}
+.ck-satz.kritik b{color:var(--rot-600)}
+
+.auf{opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease}
+.auf.da{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.auf{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<header class="kopf">
+  <div class="kopf__in">
+    <a class="marke" href="#top">Gutwort</a>
+    <nav class="nav">
+      <a href="#leistungen">Leistungen</a>
+      <a href="#ablauf">So läuft das</a>
+      <a href="#fuerwen">Für wen</a>
+      <a href="#ueberuns">Über uns</a>
+    </nav>
+    <a class="btn btn-1 btn-klein" href="#check">Bewertungs-Check</a>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- 1 Hero -->
+<section class="hero">
+  <div class="wrap hero__gitter">
+    <div>
+      <h1>Gute Arbeit spricht sich herum. Mit Gutwort auch online.</h1>
+      <p class="vor">Ihre Kunden sind zufrieden. Gutwort macht es ihnen leicht, das auch bei Google zu schreiben, und zeigt Ihnen, was in ihren Antworten steckt.</p>
+      <div class="knoepfe">
+        <a class="btn btn-1" href="#check">Kostenlosen Bewertungs-Check anfordern</a>
+        <a class="btn btn-2" href="#ablauf">In 15 Minuten zeigen wir es Ihnen</a>
+      </div>
+      <div class="vertrauen">
+        <span><i class="punkt"></i>Echte Bewertungen statt gekaufter</span>
+        <span><i class="punkt"></i>Server in Deutschland</span>
+        <span><i class="punkt"></i>Der Check kostet nichts</span>
+      </div>
+    </div>
+
+    <div class="buehne">
+      <div class="panel">
+        <div class="p-kopf">
+          <span class="p-live"><i class="p-live__punkt"></i>Ihr Profil</span>
+          <span class="p-zeit">letzte 30 Tage</span>
+        </div>
+
+        <div class="p-betrieb">
+          <span class="p-logo" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 2.5c-3.2 0-5.8 2.6-5.8 5.8 0 4.3 5.8 13.2 5.8 13.2s5.8-8.9 5.8-13.2c0-3.2-2.6-5.8-5.8-5.8z" fill="#fff"/><circle cx="12" cy="8.3" r="2.3" fill="#1B6B4A"/></svg>
+          </span>
+          <span class="p-btext">
+            <span class="p-bname">Meisterbetrieb Ruhland</span>
+            <span class="p-bzus">Dachdeckerei · 4,8
+              <svg width="11" height="11" viewBox="0 0 16 16" fill="#E8A317" aria-hidden="true"><path d="M8 0l2.5 5 5.5.8-4 3.9.9 5.5L8 12.6 3.1 15.2 4 9.7 0 5.8 5.5 5z"/></svg>
+            </span>
+          </span>
+          <span class="p-bzahl">
+            <span class="p-bzahl__wert tab">36</span>
+            <span class="p-bzahl__was">BEWERTUNGEN</span>
+          </span>
+        </div>
+
+        <div class="p-kacheln">
+          <div class="p-kachel"><span class="p-kachel__was">Neu im Zeitraum</span><span class="p-kachel__wert tab">24</span><span class="p-kachel__zus">vorher 12</span></div>
+          <div class="p-kachel"><span class="p-kachel__was">Schnitt</span><span class="p-kachel__wert tab">4,8</span><span class="p-kachel__zus">+0,1</span></div>
+          <div class="p-kachel"><span class="p-kachel__was">Beantwortet</span><span class="p-kachel__wert tab">33</span><span class="p-kachel__zus">3 offen</span></div>
+        </div>
+
+        <div class="p-block">
+          <div class="p-block__kopf">
+            <span class="p-block__titel">Namentlich gelobt</span>
+            <span class="p-block__zus">aus 36 Bewertungen</span>
+          </div>
+          <div class="p-leute">
+            <div class="p-person">
+              <span class="p-person__name">Andreas M.</span><span class="p-person__zahl tab">31</span>
+              <span class="p-person__balken" style="--w:100%;--f:var(--gruen-700)"></span>
+            </div>
+            <div class="p-person">
+              <span class="p-person__name">Kevin T.</span><span class="p-person__zahl tab">22</span>
+              <span class="p-person__balken" style="--w:71%;--f:var(--gruen-500)"></span>
+            </div>
+            <div class="p-person">
+              <span class="p-person__name">Jasmin R.</span><span class="p-person__zahl tab">15</span>
+              <span class="p-person__balken" style="--w:48%;--f:var(--gruen-300)"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-block">
+          <div class="p-block__kopf">
+            <span class="p-block__titel">Worüber Ihre Kunden reden</span>
+            <span class="p-block__zus">Lob und Leistung</span>
+          </div>
+          <div class="p-chips">
+            <span class="p-chip p-chip--stark">Termin gehalten <span class="p-chip__zahl">44</span></span>
+            <span class="p-chip">Baustelle sauber <span class="p-chip__zahl">31</span></span>
+            <span class="p-chip">Dachsanierung <span class="p-chip__zahl">18</span></span>
+            <span class="p-chip">Wartung <span class="p-chip__zahl">11</span></span>
+            <span class="p-chip p-chip--kritik">Rückruf dauert <span class="p-chip__zahl">6</span></span>
+          </div>
+          <p class="p-merk"><strong>„Termin gehalten“ ist Ihr stärkstes Argument.</strong> Es steht noch auf keiner Ihrer Seiten.</p>
+        </div>
+      </div>
+
+      <div class="blase blase--1">
+        <span class="blase__ic" aria-hidden="true">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="#E8A317"><path d="M8 0l2.5 5 5.5.8-4 3.9.9 5.5L8 12.6 3.1 15.2 4 9.7 0 5.8 5.5 5z"/></svg>
+        </span>
+        <span class="blase__text">
+          <span class="blase__titel">Neue Bewertung</span>
+          <span class="blase__zus">gerade eben · Andreas M. gelobt</span>
+        </span>
+      </div>
+
+      <div class="blase blase--2">
+        <span class="blase__ic" aria-hidden="true">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="#1B6B4A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 11l4-4 3 3 5-6"/><path d="M11 4h3v3"/></svg>
+        </span>
+        <span class="blase__text">
+          <span class="blase__titel">12 → 36 Bewertungen</span>
+          <span class="blase__zus">in 30 Tagen</span>
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2 Problem -->
+<section class="band b-gruen auf">
+  <div class="wrap">
+    <div class="label">Das Problem</div>
+    <h2 class="t">Sie verlieren Kunden, ohne es zu merken</h2>
+    <div class="problem__liste">
+      <p>Wenn jemand in Ihrer Stadt nach Ihrer Leistung sucht, entscheidet sich in wenigen Sekunden, wen er anruft. Meistens einen der drei Betriebe, die Google oben auf der Karte zeigt.</p>
+      <p>Welcher davon es wird, hängt an den Bewertungen. Ihre Arbeit kennt der Anrufer ja noch nicht, er kennt nur, was andere über Sie geschrieben haben.</p>
+      <p>Der Betrieb drei Straßen weiter hat 140 Bewertungen, Sie haben zwölf. Er bekommt den Anruf. Sie erfahren nie, wie viele Kunden Sie gesucht hätten.</p>
+      <p>Dabei sind Ihre Kunden zufrieden. Sie werden nur nie gefragt. Und wenn doch, steht da ein leeres Textfeld, der Kunde weiß nicht, was er schreiben soll, und der Moment ist vorbei.</p>
+    </div>
+    <p class="brueckensatz">Genau da setzt Gutwort an.</p>
+  </div>
+</section>
+
+<!-- 3 So läuft das -->
+<section class="band auf" id="ablauf">
+  <div class="wrap">
+    <div class="label">So läuft das</div>
+    <h2 class="t">Drei Schritte, und Sie sind raus</h2>
+    <div class="schritte">
+      <article class="schritt">
+        <div class="schritt__kopf">
+          <span class="ic" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/>
+              <path d="M14 14h3.5M21 14v3.5M14 18v3M17.5 21H21"/>
+            </svg>
+          </span>
+          <span class="schritt__nr">1</span>
+        </div>
+        <h3>Einladen</h3>
+        <p>QR-Code auf der Rechnung, E-Mail oder SMS an Ihre Bestandskunden. Den Text schreiben wir, Sie geben ihn frei.</p>
+      </article>
+      <article class="schritt">
+        <div class="schritt__kopf">
+          <span class="ic" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="2.5" width="6" height="11" rx="3"/>
+              <path d="M5.5 11a6.5 6.5 0 0 0 13 0"/><path d="M12 17.5V21"/><path d="M8.5 21h7"/>
+            </svg>
+          </span>
+          <span class="schritt__nr">2</span>
+        </div>
+        <h3>Ihr Kunde erzählt</h3>
+        <p>Er klickt an, was gut lief, oder spricht es einfach auf. Eine Minute, kein Konto, kein Formular über drei Seiten.</p>
+      </article>
+      <article class="schritt">
+        <div class="schritt__kopf">
+          <span class="ic" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2.8l2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.1l-5.6 2.9 1.1-6.2L3 9.4l6.2-.9z"/>
+            </svg>
+          </span>
+          <span class="schritt__nr">3</span>
+        </div>
+        <h3>Die Bewertung landet bei Google</h3>
+        <p>Ihr Kunde liest, ändert was er ändern will, und postet selbst. Im Cockpit sehen Sie, was daraus geworden ist.</p>
+      </article>
+    </div>
+    <p class="aufwand">Ihr Aufwand nach der Einrichtung: ein Blick ins Cockpit pro Woche.</p>
+  </div>
+</section>
+
+<!-- 3b Zahlenband -->
+<section class="band zahlenband auf">
+  <div class="wrap">
+    <div class="zahlen">
+      <div class="zahl-kachel"><strong>&lt; 1 Min.</strong><span>bis die Bewertung geschrieben ist, per Klick oder Sprache</span></div>
+      <div class="zahl-kachel"><strong>0 €</strong><span>Kosten für erfundene oder gekaufte Bewertungen, weil wir das nicht anbieten</span></div>
+      <div class="zahl-kachel"><strong>DE</strong><span>Serverstandort, DSGVO-konform, AV-Vertrag inklusive</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 4 Leistungen -->
+<section class="band b-sand auf" id="leistungen">
+  <div class="wrap">
+    <div class="label">Die Leistungen</div>
+    <h2 class="t">Was Gutwort für Sie tut</h2>
+
+    <div class="leistung">
+      <div class="leistung__text">
+        <h3>Bewerten in einer Minute, auch per Sprache</h3>
+        <p>Ihr Kunde wählt aus, was ihm gefallen hat, oder erzählt es frei ins Mikrofon. Dazu kann er ein Foto oder ein kurzes Video anhängen. Die KI formt daraus einen Text in seinen Worten, er gibt ihn frei und postet ihn selbst. Das leere Textfeld, an dem die meisten Bewertungen scheitern, gibt es bei uns nicht.</p>
+      </div>
+      <div>
+        <div class="geraet geraet--handy">
+          <picture>
+            <source srcset="bilder/web/geraet-handy.webp" type="image/webp">
+            <img class="foto" src="bilder/web/geraet-handy.jpg" alt="Eine Hand hält ein Smartphone in einer Werkstatt" width="1600" height="1040" loading="lazy">
+          </picture>
+          <div class="geraet__screen" aria-hidden="true">
+            <svg viewBox="0 0 300 640" preserveAspectRatio="xMidYMid slice">
+              <rect width="300" height="640" fill="#fff"/>
+              <rect x="0" y="0" width="300" height="70" fill="#F2F8F4"/>
+              <circle cx="34" cy="35" r="12" fill="#1B6B4A"/>
+              <text x="54" y="40" font-family="Inter,Arial,sans-serif" font-size="15" font-weight="600" fill="#12312A">Meisterbetrieb Ruhland</text>
+              <text x="26" y="128" font-family="Georgia,serif" font-size="27" font-weight="600" fill="#12312A">Ihre Erfahrung,</text>
+              <text x="26" y="162" font-family="Georgia,serif" font-size="27" font-weight="600" fill="#12312A">in Ihren Worten.</text>
+              <text x="26" y="198" font-family="Inter,Arial,sans-serif" font-size="14" fill="#57544E">Erzählen Sie kurz, wie es lief.</text>
+              <rect x="26" y="232" width="248" height="58" rx="29" fill="#1B6B4A"/>
+              <circle cx="76" cy="261" r="9" fill="none" stroke="#fff" stroke-width="2"/>
+              <rect x="73" y="255" width="6" height="9" rx="3" fill="#fff"/>
+              <text x="100" y="267" font-family="Inter,Arial,sans-serif" font-size="16" font-weight="600" fill="#fff">Erzählen Sie es einfach</text>
+              <text x="150" y="322" font-family="Inter,Arial,sans-serif" font-size="13" fill="#8B8781" text-anchor="middle">oder</text>
+              <rect x="26" y="342" width="248" height="54" rx="27" fill="#fff" stroke="#1B6B4A" stroke-width="1.5"/>
+              <text x="150" y="375" font-family="Inter,Arial,sans-serif" font-size="16" font-weight="600" fill="#1B6B4A" text-anchor="middle">Lieber tippen</text>
+              <rect x="26" y="428" width="248" height="180" rx="14" fill="#F2F8F4"/>
+              <text x="46" y="458" font-family="Inter,Arial,sans-serif" font-size="11" font-weight="600" letter-spacing="1.2" fill="#57544E">ABLAUF</text>
+              <text x="46" y="490" font-family="Inter,Arial,sans-serif" font-size="13" fill="#1B6B4A">01</text>
+              <text x="74" y="490" font-family="Inter,Arial,sans-serif" font-size="13" fill="#1C1B19">Sie erzählen, ganz frei.</text>
+              <text x="46" y="524" font-family="Inter,Arial,sans-serif" font-size="13" fill="#1B6B4A">02</text>
+              <text x="74" y="524" font-family="Inter,Arial,sans-serif" font-size="13" fill="#1C1B19">Sie prüfen den Text.</text>
+              <text x="46" y="558" font-family="Inter,Arial,sans-serif" font-size="13" fill="#1B6B4A">03</text>
+              <text x="74" y="558" font-family="Inter,Arial,sans-serif" font-size="13" fill="#1C1B19">Nichts ohne Ihre Freigabe.</text>
+            </svg>
+          </div>
+        </div>
+        <p class="bu">Ihre Kunden sehen Ihr Logo und Ihre Farben, nicht unsere.</p>
+      </div>
+    </div>
+
+    <p class="bruecke">Die Bewertung ist geschrieben. Danach beginnt die Arbeit, die den meisten Betrieben liegen bleibt.</p>
+
+    <div class="leistung leistung--dreh">
+      <div class="leistung__text">
+        <h3>Alle Bewertungen an einem Ort</h3>
+        <p>Sie sehen jede neue Bewertung im Cockpit, über alle Plattformen hinweg. Antworten schlägt Ihnen die KI in Ihrem Ton vor, Sie ändern und geben frei. Wenn Sie eine Bewertung bei Google melden, verlieren Sie sie nicht aus den Augen: Gutwort verfolgt, was daraus wird.</p>
+      </div>
+      <div class="figur">
+        <svg viewBox="0 0 460 300" role="img" aria-label="Cockpit: Liste eingegangener Bewertungen mit Antwortstatus">
+          <rect x="8" y="8" width="444" height="284" rx="14" fill="#fff" stroke="#D9D5CE"/>
+          <rect x="8" y="8" width="444" height="42" rx="14" fill="#F2F8F4"/>
+          <rect x="8" y="36" width="444" height="14" fill="#F2F8F4"/>
+          <text x="28" y="34" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="600" fill="#12312A">Bewertungen</text>
+          <rect x="352" y="19" width="80" height="20" rx="10" fill="#E4F2EA"/>
+          <text x="392" y="33" font-family="Inter,Arial,sans-serif" font-size="10" fill="#1B6B4A" text-anchor="middle">3 offen</text>
+          <g font-family="Inter,Arial,sans-serif">
+            <g>
+              <line x1="28" y1="72" x2="432" y2="72" stroke="#EFEDE9"/>
+              <g fill="#E8A317" transform="translate(28,84) scale(.62)"><path d="M8 0l2.5 5 5.5.8-4 3.9.9 5.5L8 12.6 3.1 15.2 4 9.7 0 5.8 5.5 5z"/><path d="M26 0l2.5 5 5.5.8-4 3.9.9 5.5L26 12.6l-4.9 2.6.9-5.5-4-3.9 5.5-.8z"/><path d="M44 0l2.5 5 5.5.8-4 3.9.9 5.5L44 12.6l-4.9 2.6.9-5.5-4-3.9 5.5-.8z"/><path d="M62 0l2.5 5 5.5.8-4 3.9.9 5.5L62 12.6l-4.9 2.6.9-5.5-4-3.9 5.5-.8z"/><path d="M80 0l2.5 5 5.5.8-4 3.9.9 5.5L80 12.6l-4.9 2.6.9-5.5-4-3.9 5.5-.8z"/></g>
+              <text x="92" y="96" font-size="11" fill="#57544E">Familie K. · Dachsanierung</text>
+              <rect x="336" y="83" width="96" height="19" rx="9.5" fill="#E4F2EA"/>
+              <text x="384" y="96" font-size="9.5" fill="#1B6B4A" text-anchor="middle">Antwort bereit</text>
+              <text x="28" y="118" font-size="10.5" fill="#8B8781">„Termin gehalten, Baustelle sauber verlassen.“</text>
+            </g>
+            <g transform="translate(0,58)">
+              <line x1="28" y1="72" x2="432" y2="72" stroke="#EFEDE9"/>
+              <g fill="#E8A317" transform="translate(28,84) scale(.62)"><path d="M8 0l2.5 5 5.5.8-4 3.9.9 5.5L8 12.6 3.1 15.2 4 9.7 0 5.8 5.5 5z"/><path d="M26 0l2.5 5 5.5.8-4 3.9.9 5.5L26 12.6l-4.9 2.6.9-5.5-4-3.9 5.5-.8z"/><path d="M44 0l2.5 5 5.5.8-4 3.9.9 5.5L44 12.6l-4.9 2.6.9-5.5-4-3.9 5.5-.8z"/><path d="M62 0l2.5 5 5.5.8-4 3.9.9 5.5L62 12.6l-4.9 2.6.9-5.5-4-3.9 5.5-.8z"/></g>
+              <g fill="#EDE4D6" transform="translate(28,84) scale(.62)"><path d="M80 0l2.5 5 5.5.8-4 3.9.9 5.5L80 12.6l-4.9 2.6.9-5.5-4-3.9 5.5-.8z"/></g>
+              <text x="92" y="96" font-size="11" fill="#57544E">M. Berger · Flachdach</text>
+              <rect x="336" y="83" width="96" height="19" rx="9.5" fill="#F6F1E8"/>
+              <text x="384" y="96" font-size="9.5" fill="#8A6A2A" text-anchor="middle">bei Google gemeldet</text>
+              <text x="28" y="118" font-size="10.5" fill="#8B8781">Prüfung läuft seit 6 Tagen</text>
+            </g>
+            <g transform="translate(0,116)">
+              <line x1="28" y1="72" x2="432" y2="72" stroke="#EFEDE9"/>
+              <g fill="#E8A317" transform="translate(28,84) scale(.62)"><path d="M8 0l2.5 5 5.5.8-4 3.9.9 5.5L8 12.6 3.1 15.2 4 9.7 0 5.8 5.5 5z"/><path d="M26 0l2.5 5 5.5.8-4 3.9.9 5.5L26 12.6l-4.9 2.6.9-5.5-4-3.9 5.5-.8z"/><path d="M44 0l2.5 5 5.5.8-4 3.9.9 5.5L44 12.6l-4.9 2.6.9-5.5-4-3.9 5.5-.8z"/><path d="M62 0l2.5 5 5.5.8-4 3.9.9 5.5L62 12.6l-4.9 2.6.9-5.5-4-3.9 5.5-.8z"/><path d="M80 0l2.5 5 5.5.8-4 3.9.9 5.5L80 12.6l-4.9 2.6.9-5.5-4-3.9 5.5-.8z"/></g>
+              <text x="92" y="96" font-size="11" fill="#57544E">S. Weiß · Wartung</text>
+              <rect x="360" y="83" width="72" height="19" rx="9.5" fill="#EFEDE9"/>
+              <text x="396" y="96" font-size="9.5" fill="#57544E" text-anchor="middle">beantwortet</text>
+            </g>
+          </g>
+        </svg>
+        <p class="bu">Beispielansicht mit erfundenen Daten.</p>
+      </div>
+    </div>
+
+    <p class="bruecke">Das erklärt, was schon passiert ist. Die eigentliche Frage ist, wo die nächsten Bewertungen herkommen.</p>
+
+    <div class="leistung">
+      <div class="leistung__text">
+        <h3>Bestandskunden aktivieren</h3>
+        <p>Der größte Vorrat an Bewertungen liegt bei den Kunden, die Sie längst haben. Gutwort hilft Ihnen, sie anzuschreiben, per E-Mail oder SMS, mit persönlicher Ansprache und in mehreren Wellen statt alle auf einmal.</p>
+      </div>
+      <div class="figur">
+        <svg viewBox="0 0 460 300" role="img" aria-label="Trichter: von der Einladung bis zur veröffentlichten Bewertung">
+          <rect x="8" y="8" width="444" height="284" rx="14" fill="#fff" stroke="#D9D5CE"/>
+          <text x="28" y="40" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="600" fill="#12312A">Kampagne, Welle 2</text>
+          <g font-family="Inter,Arial,sans-serif">
+            <rect x="28" y="62" width="404" height="40" rx="8" fill="#E4F2EA"/>
+            <text x="44" y="87" font-size="12" fill="#12312A">Eingeladen</text>
+            <text x="416" y="87" font-size="14" font-weight="600" fill="#12312A" text-anchor="end">180</text>
+            <rect x="28" y="112" width="300" height="40" rx="8" fill="#D3E9DE"/>
+            <text x="44" y="137" font-size="12" fill="#12312A">Maske geöffnet</text>
+            <text x="312" y="137" font-size="14" font-weight="600" fill="#12312A" text-anchor="end">96</text>
+            <rect x="28" y="162" width="204" height="40" rx="8" fill="#9CCFB5"/>
+            <text x="44" y="187" font-size="12" fill="#12312A">Text erstellt</text>
+            <text x="216" y="187" font-size="14" font-weight="600" fill="#12312A" text-anchor="end">54</text>
+            <rect x="28" y="212" width="148" height="40" rx="8" fill="#1B6B4A"/>
+            <text x="44" y="237" font-size="12" fill="#fff">Veröffentlicht</text>
+            <text x="160" y="237" font-size="14" font-weight="600" fill="#fff" text-anchor="end">38</text>
+            <text x="28" y="274" font-size="10.5" fill="#8B8781">Ein Beispielverlauf. Ihre Zahlen sehen anders aus.</text>
+          </g>
+        </svg>
+      </div>
+    </div>
+
+    <p class="bruecke">Bleibt die Frage, was in den Antworten eigentlich drinsteht.</p>
+
+    <div class="leistung leistung--dreh">
+      <div class="leistung__text">
+        <h3>Auswerten nach Mitarbeitern und Leistungen</h3>
+        <p>Weil Ihre Kunden angeben, mit wem sie zu tun hatten und worum es ging, sehen Sie, wer besonders oft gelobt wird und welche Leistung am besten ankommt. Und Sie sehen, wo es hakt, bevor es Sie einen Kunden kostet.</p>
+      </div>
+      <div class="figur">
+        <svg viewBox="0 0 460 300" role="img" aria-label="Auswertung: welcher Mitarbeiter wie oft namentlich gelobt wird">
+          <rect x="8" y="8" width="444" height="284" rx="14" fill="#fff" stroke="#D9D5CE"/>
+          <text x="28" y="40" font-family="Inter,Arial,sans-serif" font-size="12" font-weight="600" fill="#12312A">Namentlich gelobt, letzte 90 Tage</text>
+          <g font-family="Inter,Arial,sans-serif" font-size="11.5">
+            <text x="28" y="76" fill="#57544E">Andreas M.</text>
+            <rect x="130" y="64" width="252" height="16" rx="8" fill="#1B6B4A"/>
+            <text x="428" y="76" fill="#12312A" font-weight="600" text-anchor="end">31</text>
+            <text x="28" y="112" fill="#57544E">Kevin T.</text>
+            <rect x="130" y="100" width="178" height="16" rx="8" fill="#35A06B"/>
+            <text x="428" y="112" fill="#12312A" font-weight="600" text-anchor="end">22</text>
+            <text x="28" y="148" fill="#57544E">Jasmin R.</text>
+            <rect x="130" y="136" width="122" height="16" rx="8" fill="#9CCFB5"/>
+            <text x="428" y="148" fill="#12312A" font-weight="600" text-anchor="end">15</text>
+            <text x="28" y="184" fill="#57544E">Ömer K.</text>
+            <rect x="130" y="172" width="66" height="16" rx="8" fill="#C7D0DE"/>
+            <text x="428" y="184" fill="#12312A" font-weight="600" text-anchor="end">8</text>
+          </g>
+          <line x1="28" y1="210" x2="432" y2="210" stroke="#EFEDE9"/>
+          <text x="28" y="236" font-family="Inter,Arial,sans-serif" font-size="11" font-weight="600" fill="#12312A">Häufigstes Lob</text>
+          <text x="28" y="256" font-family="Inter,Arial,sans-serif" font-size="11.5" fill="#57544E">„Termin gehalten“ · 44 Nennungen</text>
+          <text x="28" y="274" font-family="Inter,Arial,sans-serif" font-size="11.5" fill="#B4432E">Wiederkehrende Kritik: Rückruf dauert · 6 Nennungen</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4b Cockpit -->
+<section class="band auf" id="cockpit">
+  <div class="wrap">
+    <div class="label">Transparenz</div>
+    <h2 class="t">Sehen, was wirklich passiert</h2>
+    <p class="vor eng">Wie viele Einladungen sind rausgegangen, wie viele Kunden haben angefangen zu schreiben, wie viele Bewertungen stehen jetzt bei Google. Sie sehen die Zahlen, nicht nur das Ergebnis. Und Sie sehen, worüber Ihre Kunden reden.</p>
+
+    <div class="cockpit">
+      <div class="cockpit__leiste" aria-hidden="true">
+        <i></i><i></i><i></i><span>Ihr Cockpit</span>
+      </div>
+      <div class="cockpit__in">
+        <nav class="ck-seite" aria-label="Beispielnavigation">
+          <b>Gutwort</b>
+          <a class="an" href="#cockpit">Übersicht</a>
+          <a href="#cockpit">Bewertungen</a>
+          <small>Maske</small>
+          <div class="tief">
+            <a href="#cockpit">Ablauf und Fragen</a>
+            <a href="#cockpit">Leistungen</a>
+            <a href="#cockpit">Mitarbeiter</a>
+          </div>
+          <small>Gewinnen</small>
+          <div class="tief">
+            <a href="#cockpit">QR-Codes</a>
+            <a href="#cockpit">Einladungstext</a>
+          </div>
+        </nav>
+
+        <div class="ck-inhalt">
+          <div class="ck-kopf">
+            <h3>Übersicht</h3>
+            <em>Meisterbetrieb Ruhland · letzte 30 Tage</em>
+          </div>
+
+          <div class="ck-zahlen">
+            <div class="ck-zahl"><u>Neue Bewertungen bei Google</u><strong>24</strong><s>vorher 12, jetzt 36</s></div>
+            <div class="ck-zahl"><u>Schnitt</u><strong>4,8</strong><s>von 36 Bewertungen</s></div>
+            <div class="ck-zahl"><u>Wartet auf Ihre Antwort</u><strong>3</strong><s>Vorschläge liegen bereit</s></div>
+          </div>
+
+          <div class="ck-gitter">
+            <div class="ck-karte">
+              <h4>Vom Anschreiben bis zur Bewertung</h4>
+              <div class="ck-stufe"><span>Eingeladen</span><b>180</b><i style="--w:100%;--f:var(--gruen-900)"></i></div>
+              <div class="ck-stufe"><span>Maske geöffnet</span><b>96</b><i style="--w:53%;--f:var(--gruen-700)"></i></div>
+              <div class="ck-stufe"><span>Text erstellt</span><b>54</b><i style="--w:30%;--f:var(--gruen-500)"></i></div>
+              <div class="ck-stufe"><span>Bei Google veröffentlicht</span><b>24</b><i style="--w:13%;--f:#9CCFB5"></i></div>
+              <p class="ck-satz" style="margin-top:.9rem">Beispieldaten eines erfundenen Betriebs.</p>
+            </div>
+
+            <div class="ck-karte">
+              <h4>Namentlich gelobt</h4>
+              <div class="ck-lob">
+                <div><span>Andreas M.</span><b>31</b><i style="--w:100%;--f:var(--gruen-700)"></i></div>
+                <div><span>Kevin T.</span><b>22</b><i style="--w:71%;--f:var(--gruen-500)"></i></div>
+                <div><span>Jasmin R.</span><b>15</b><i style="--w:48%;--f:#9CCFB5"></i></div>
+              </div>
+              <p class="ck-satz"><b>Termin gehalten</b> · 44 Nennungen</p>
+              <p class="ck-satz kritik"><b>Rückruf dauert</b> · 6 Nennungen, zweiter Monat</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="bu" style="text-align:left;margin-top:1rem">So sieht Ihr Cockpit aus. Ein Blick pro Woche reicht.</p>
+  </div>
+</section>
+
+<!-- 5 USP -->
+<section class="band b-sand auf">
+  <div class="wrap">
+    <div class="label">Der Unterschied</div>
+    <h2 class="t">Andere zeigen Bewertungen an. Gutwort versteht sie.</h2>
+    <p class="vor eng">Weil Ihre Kunden bei uns strukturiert antworten, welche Leistung, welcher Mitarbeiter, was gut lief, entsteht nebenbei etwas, das bei Google nie sichtbar wird:</p>
+    <ul class="usp__liste">
+      <li><svg width="18" height="18" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.5 3.5L13 5" fill="none" stroke="#1B6B4A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>welche Leistung Ihre Kunden wirklich schätzen, und nicht die, für die Sie sich halten</span></li>
+      <li><svg width="18" height="18" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.5 3.5L13 5" fill="none" stroke="#1B6B4A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>wer aus Ihrem Team am häufigsten mit Namen gelobt wird</span></li>
+      <li><svg width="18" height="18" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.5 3.5L13 5" fill="none" stroke="#1B6B4A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>welches Argument in den Bewertungen immer wieder auftaucht, das gehört auf Ihre Startseite</span></li>
+      <li><svg width="18" height="18" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.5 3.5L13 5" fill="none" stroke="#1B6B4A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>wo dieselbe Kritik zum zweiten Mal steht</span></li>
+    </ul>
+    <p class="pointe">Ein Anzeige-Widget kostet fünf Euro im Monat und kann keinen dieser Sätze sagen.</p>
+
+    <div class="zweiter-usp">
+      <h2 class="t">Andere schicken eine Erinnerung. Wir nehmen Ihrem Kunden das leere Textfeld ab.</h2>
+      <p class="vor eng">Die meisten Werkzeuge lösen nur die halbe Aufgabe. Sie erinnern den Kunden daran, dass er bewerten wollte. Dann steht er vor einem leeren Feld und schreibt doch nichts. Gutwort löst die zweite Hälfte: Ihr Kunde spricht eine Minute, den Rest macht die Technik.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 6 Für wen -->
+<section class="band b-gruen auf" id="fuerwen">
+  <div class="wrap">
+    <div class="label">Für wen</div>
+    <h2 class="t">Gutwort ist nicht für jeden gebaut</h2>
+    <p class="vor eng">Drei Bedingungen, alle drei sollten stimmen.</p>
+
+    <div class="waage">
+      <div class="spalte spalte--ja">
+        <h3>Gutwort passt zu Ihnen</h3>
+        <ul>
+          <li><svg width="17" height="17" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.5 3.5L13 5" fill="none" stroke="#C6F24E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong>Sie kennen Ihre Kunden mit Namen.</strong>E-Mail oder Handynummer sind da, der Kontakt war persönlich.</span></li>
+          <li><svg width="17" height="17" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.5 3.5L13 5" fill="none" stroke="#C6F24E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong>Ihre Kunden sind zufrieden.</strong>Wer schon bewertet hat, gibt Ihnen viereinhalb Sterne oder mehr. Es sind nur zu wenige.</span></li>
+          <li><svg width="17" height="17" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.5 3.5L13 5" fill="none" stroke="#C6F24E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span><strong>Sie haben weniger Bewertungen als der stärkste Betrieb in Ihrer Stadt.</strong>Das ist die Lücke, um die es geht.</span></li>
+        </ul>
+      </div>
+      <div class="spalte spalte--nein">
+        <h3>Dann sind wir die Falschen</h3>
+        <ul>
+          <li><svg width="17" height="17" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8" fill="none" stroke="#B4432E" stroke-width="2" stroke-linecap="round"/></svg><span><strong>Wer seine Kunden nicht kennt.</strong>Laufkundschaft in Gastronomie und Einzelhandel. Da bringt Ihnen ein QR-Code am Tresen mehr als wir.</span></li>
+          <li><svg width="17" height="17" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8" fill="none" stroke="#B4432E" stroke-width="2" stroke-linecap="round"/></svg><span><strong>Wer unter vier Sternen steht.</strong>Dann ist Sichtbarkeit nicht Ihr Problem. Mehr Bewertungen machen ein schwaches Profil nur lauter.</span></li>
+          <li><svg width="17" height="17" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8" fill="none" stroke="#B4432E" stroke-width="2" stroke-linecap="round"/></svg><span><strong>Wer schnell viele Sterne will.</strong>Bewertungsspitzen sind genau das Muster, auf das Google reagiert.</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="branchen">
+      <article class="branche">
+        <picture>
+          <source srcset="bilder/web/branche-dachdecker.webp" type="image/webp">
+          <img src="bilder/web/branche-dachdecker.jpg" alt="Dachdecker bei der Arbeit auf einem Wohnhausdach" width="1600" height="1179" loading="lazy">
+        </picture>
+        <div class="branche__text">
+          <h4>Handwerk mit Termin beim Kunden</h4>
+          <p>Dachdecker, Elektro, Sanitär und Heizung, Maler, Garten- und Landschaftsbau. Ein einziger zusätzlicher Auftrag trägt hier das ganze Jahr.</p>
+        </div>
+      </article>
+      <article class="branche">
+        <picture>
+          <source srcset="bilder/web/branche-physiotherapie.webp" type="image/webp">
+          <img src="bilder/web/branche-physiotherapie.jpg" alt="Behandlung in einer Physiotherapiepraxis" width="1600" height="1179" loading="lazy">
+        </picture>
+        <div class="branche__text">
+          <h4>Praxen und Studios</h4>
+          <p>Physiotherapie, Zahnarzt, Orthopädie. Wer einen Behandler sucht, liest zuerst, was andere Patienten geschrieben haben.</p>
+        </div>
+      </article>
+      <article class="branche">
+        <picture>
+          <source srcset="bilder/web/branche-kanzlei.webp" type="image/webp">
+          <img src="bilder/web/branche-kanzlei.jpg" alt="Arbeitsplatz in einer Steuerkanzlei" width="1600" height="1179" loading="lazy">
+        </picture>
+        <div class="branche__text">
+          <h4>Beratende Berufe mit festem Ansprechpartner</h4>
+          <p>Steuerberatung, Buchhaltung, Kanzleien, Versicherungs- und Immobilienmakler. Der Name des Betreuers ist das eigentliche Produkt.</p>
+        </div>
+      </article>
+      <article class="branche">
+        <picture>
+          <source srcset="bilder/web/branche-werkstatt.webp" type="image/webp">
+          <img src="bilder/web/branche-werkstatt.jpg" alt="Arbeit am Motorraum in einer Kfz-Werkstatt" width="1600" height="1179" loading="lazy">
+        </picture>
+        <div class="branche__text">
+          <h4>Betriebe mit Stammkundschaft</h4>
+          <p>Kfz-Werkstatt, Fahrschule, Pflegedienst. Menschen, die wiederkommen und Sie beim Namen kennen.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!--
+  6b REFERENZEN · PLATZHALTER
+  Vor dem Livegang zu füllen:
+  · Logoleiste: Logos der Betriebe, nur mit schriftlicher Freigabe des jeweiligen Betriebs.
+  · Je Fall: Betriebsname, Branche, Bewertungen vorher und nachher, Zeitraum, ein wörtliches
+    Zitat mit Namen und Funktion. Zahlen ausschließlich aus dem Cockpit, nichts geschätzt.
+  · Wenn nach dem ersten Pilotkunden nur ein Fall vorliegt: die anderen beiden Karten löschen,
+    statt sie mit Dünnem zu füllen. Ein belegter Fall wirkt stärker als drei vage.
+  · Die gestrichelten Rahmen und der Warnkasten müssen dann raus.
+-->
+<section class="band auf" id="referenzen">
+  <div class="wrap">
+    <div class="label">Erste Ergebnisse</div>
+    <h2 class="t">Was bei anderen Betrieben herausgekommen ist</h2>
+    <p class="vor eng">Zahlen aus dem Cockpit, Zitate von den Betrieben selbst. Kein Fall ohne Freigabe.</p>
+
+    <div class="platzhalter-warnung">
+      <svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="#8A6A2A" stroke-width="1.7" aria-hidden="true" style="flex:none;margin-top:.1rem"><path d="M8 1.5l6.5 12H1.5z" stroke-linejoin="round"/><path d="M8 6v3.4" stroke-linecap="round"/><circle cx="8" cy="11.6" r=".9" fill="#8A6A2A" stroke="none"/></svg>
+      <span><strong>Platzhalter, noch nicht veröffentlichen.</strong> Hier stehen später echte Betriebe mit echten Zahlen aus dem Cockpit. Bis der Pilot Ergebnisse liefert, bleibt dieser Abschnitt auf der Seite ausgeblendet, statt mit erfundenen Beispielen gefüllt zu werden.</span>
+    </div>
+
+    <div class="logoleiste" aria-hidden="true">
+      <div class="logoplatz">Logo Betrieb 1</div>
+      <div class="logoplatz">Logo Betrieb 2</div>
+      <div class="logoplatz">Logo Betrieb 3</div>
+      <div class="logoplatz">Logo Betrieb 4</div>
+      <div class="logoplatz">Logo Betrieb 5</div>
+    </div>
+
+    <div class="faelle">
+      <article class="fall">
+        <div class="fall__kopf">
+          <span class="fall__logo" aria-hidden="true"></span>
+          <span class="fall__wer">
+            <span class="fall__name">Betriebsname</span>
+            <span class="fall__branche">Branche, Ort</span>
+          </span>
+        </div>
+        <div>
+          <div class="fall__zahl">
+            <span class="fall__von tab">00</span>
+            <span class="fall__pfeil">→</span>
+            <span class="fall__nach tab">00</span>
+          </div>
+          <p class="fall__was">Bewertungen bei Google, in 00 Wochen</p>
+        </div>
+        <p class="fall__zitat">„Hier steht ein wörtliches Zitat des Betriebs, ein bis zwei Sätze, mit Namen und Funktion darunter."</p>
+        <div class="fall__fuss">
+          <span class="fall__sterne" aria-hidden="true">
+            <svg width="11" height="11" viewBox="0 0 16 16" fill="#D9D5CE"><path d="M8 0l2.5 5 5.5.8-4 3.9.9 5.5L8 12.6 3.1 15.2 4 9.7 0 5.8 5.5 5z"/></svg>
+            <svg width="11" height="11" viewBox="0 0 16 16" fill="#D9D5CE"><path d="M8 0l2.5 5 5.5.8-4 3.9.9 5.5L8 12.6 3.1 15.2 4 9.7 0 5.8 5.5 5z"/></svg>
+            <svg width="11" height="11" viewBox="0 0 16 16" fill="#D9D5CE"><path d="M8 0l2.5 5 5.5.8-4 3.9.9 5.5L8 12.6 3.1 15.2 4 9.7 0 5.8 5.5 5z"/></svg>
+            <svg width="11" height="11" viewBox="0 0 16 16" fill="#D9D5CE"><path d="M8 0l2.5 5 5.5.8-4 3.9.9 5.5L8 12.6 3.1 15.2 4 9.7 0 5.8 5.5 5z"/></svg>
+            <svg width="11" height="11" viewBox="0 0 16 16" fill="#D9D5CE"><path d="M8 0l2.5 5 5.5.8-4 3.9.9 5.5L8 12.6 3.1 15.2 4 9.7 0 5.8 5.5 5z"/></svg>
+          </span>
+          <span>Schnitt 0,0 · Stand Monat Jahr</span>
+        </div>
+      </article>
+
+      <article class="fall">
+        <div class="fall__kopf">
+          <span class="fall__logo" aria-hidden="true"></span>
+          <span class="fall__wer">
+            <span class="fall__name">Betriebsname</span>
+            <span class="fall__branche">Branche, Ort</span>
+          </span>
+        </div>
+        <div>
+          <div class="fall__zahl">
+            <span class="fall__von tab">00</span>
+            <span class="fall__pfeil">→</span>
+            <span class="fall__nach tab">00</span>
+          </div>
+          <p class="fall__was">Bewertungen bei Google, in 00 Wochen</p>
+        </div>
+        <p class="fall__zitat">„Zweites Zitat. Am stärksten wirkt ein Satz, der eine Sorge ausräumt, die andere auch haben."</p>
+        <div class="fall__fuss">
+          <span class="fall__sterne" aria-hidden="true">
+            <svg width="11" height="11" viewBox="0 0 16 16" fill="#D9D5CE"><path d="M8 0l2.5 5 5.5.8-4 3.9.9 5.5L8 12.6 3.1 15.2 4 9.7 0 5.8 5.5 5z"/></svg>
+            <svg width="11" height="11" viewBox="0 0 16 16" fill="#D9D5CE"><path d="M8 0l2.5 5 5.5.8-4 3.9.9 5.5L8 12.6 3.1 15.2 4 9.7 0 5.8 5.5 5z"/></svg>
+            <svg width="11" height="11" viewBox="0 0 16 16" fill="#D9D5CE"><path d="M8 0l2.5 5 5.5.8-4 3.9.9 5.5L8 12.6 3.1 15.2 4 9.7 0 5.8 5.5 5z"/></svg>
+            <svg width="11" height="11" viewBox="0 0 16 16" fill="#D9D5CE"><path d="M8 0l2.5 5 5.5.8-4 3.9.9 5.5L8 12.6 3.1 15.2 4 9.7 0 5.8 5.5 5z"/></svg>
+            <svg width="11" height="11" viewBox="0 0 16 16" fill="#D9D5CE"><path d="M8 0l2.5 5 5.5.8-4 3.9.9 5.5L8 12.6 3.1 15.2 4 9.7 0 5.8 5.5 5z"/></svg>
+          </span>
+          <span>Schnitt 0,0 · Stand Monat Jahr</span>
+        </div>
+      </article>
+
+      <article class="fall">
+        <div class="fall__kopf">
+          <span class="fall__logo" aria-hidden="true"></span>
+          <span class="fall__wer">
+            <span class="fall__name">Betriebsname</span>
+            <span class="fall__branche">Branche, Ort</span>
+          </span>
+        </div>
+        <div>
+          <div class="fall__zahl">
+            <span class="fall__von tab">00</span>
+            <span class="fall__pfeil">→</span>
+            <span class="fall__nach tab">00</span>
+          </div>
+          <p class="fall__was">Bewertungen bei Google, in 00 Wochen</p>
+        </div>
+        <p class="fall__zitat">„Drittes Zitat. Gut ist ein Satz über das, was der Betrieb aus den Auswertungen gelernt hat."</p>
+        <div class="fall__fuss">
+          <span class="fall__sterne" aria-hidden="true">
+            <svg width="11" height="11" viewBox="0 0 16 16" fill="#D9D5CE"><path d="M8 0l2.5 5 5.5.8-4 3.9.9 5.5L8 12.6 3.1 15.2 4 9.7 0 5.8 5.5 5z"/></svg>
+            <svg width="11" height="11" viewBox="0 0 16 16" fill="#D9D5CE"><path d="M8 0l2.5 5 5.5.8-4 3.9.9 5.5L8 12.6 3.1 15.2 4 9.7 0 5.8 5.5 5z"/></svg>
+            <svg width="11" height="11" viewBox="0 0 16 16" fill="#D9D5CE"><path d="M8 0l2.5 5 5.5.8-4 3.9.9 5.5L8 12.6 3.1 15.2 4 9.7 0 5.8 5.5 5z"/></svg>
+            <svg width="11" height="11" viewBox="0 0 16 16" fill="#D9D5CE"><path d="M8 0l2.5 5 5.5.8-4 3.9.9 5.5L8 12.6 3.1 15.2 4 9.7 0 5.8 5.5 5z"/></svg>
+            <svg width="11" height="11" viewBox="0 0 16 16" fill="#D9D5CE"><path d="M8 0l2.5 5 5.5.8-4 3.9.9 5.5L8 12.6 3.1 15.2 4 9.7 0 5.8 5.5 5z"/></svg>
+          </span>
+          <span>Schnitt 0,0 · Stand Monat Jahr</span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- 7 Vertrauen -->
+<section class="band b-sand auf">
+  <div class="wrap">
+    <div class="label">Vertrauen</div>
+    <div class="drei">
+      <div>
+        <span class="ic" style="margin-bottom:.9rem" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="9.5" r="6.2"/><path d="M9.3 9.6l1.9 1.9 3.6-3.8"/>
+            <path d="M8.4 15.2L7 21.5l5-2.2 5 2.2-1.4-6.3"/>
+          </svg>
+        </span>
+        <h3>Echte Bewertungen, nichts erfunden</h3>
+        <p>Ihr Kunde war da, er liefert die Fakten und gibt den Text frei. Gutwort formuliert, es erfindet nicht. Belohnungen fürs Bewerten gibt es bei uns nicht, weil Google sie verbietet und im Zweifel Ihr Profil kostet, nicht unseres.</p>
+      </div>
+      <div>
+        <span class="ic" style="margin-bottom:.9rem" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2.6l7.4 2.8v6c0 4.7-3.1 8.6-7.4 10.1-4.3-1.5-7.4-5.4-7.4-10.1v-6z"/>
+            <path d="M9.2 11.9l2 2 3.6-3.9"/>
+          </svg>
+        </span>
+        <h3>DSGVO-konform, Server in Deutschland</h3>
+        <p>Auftragsverarbeitungsvertrag inklusive. Ihre Kundendaten bleiben Ihre Kundendaten, wir geben sie nicht weiter und nutzen sie nicht für Werbung.</p>
+      </div>
+      <div>
+        <span class="ic" style="margin-bottom:.9rem" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2.6" y="7.4" width="18.8" height="9.2" rx="4.6"/>
+            <circle cx="16.8" cy="12" r="2.9"/>
+          </svg>
+        </span>
+        <h3>Sie behalten die Kontrolle</h3>
+        <p>Nichts geht raus, was Sie nicht freigegeben haben. Kein Text, keine Einladung, keine Antwort.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 8 Werte -->
+<section class="band werteband auf">
+  <div class="werteband__bild" aria-hidden="true">
+    <picture>
+      <source srcset="bilder/web/werte-haende-zollstock.webp" type="image/webp">
+      <img src="bilder/web/werte-haende-zollstock.jpg" alt="" width="1600" height="914" loading="lazy">
+    </picture>
+  </div>
+  <div class="wrap">
+    <div class="label">Warum wir das machen</div>
+    <h2 class="t">Ein gutes Wort bekommt man. Man kauft es nicht.</h2>
+    <p class="vor eng">Es gibt genug Anbieter, die Ihnen Sterne verkaufen. Wir haben uns dagegen entschieden, nicht aus Vorsicht, sondern weil es sonst nicht funktioniert. Vier Sätze, an die wir uns halten, auch wenn sie uns Geld kosten.</p>
+    <div class="werte">
+      <div class="wert">
+        <h3>Echt oder gar nicht</h3>
+        <p>Jede Bewertung kommt von jemandem, der wirklich bei Ihnen war. Deshalb haben wir die Belohnungs-Funktion wieder gestrichen, obwohl sie die Quote erhöht hätte. Wer Bewertungen kauft, verliert sie wieder: Auswertungen von Hunderttausenden gelöschten Google-Bewertungen zeigen, dass gekaufte Bewertungen zuverlässig erkannt und entfernt werden.</p>
+      </div>
+      <div class="wert">
+        <h3>Gute Arbeit soll gewinnen, nicht das größte Werbebudget</h3>
+        <p>Die besten Betriebe sind selten die lautesten. Wer sauber arbeitet, pünktlich kommt und sich kümmert, soll oben stehen. Dafür bauen wir das.</p>
+      </div>
+      <div class="wert">
+        <h3>Ihre Kundenbeziehung gehört Ihnen</h3>
+        <p>Wir schreiben Ihre Kunden nicht sturmreif. Höchstens zwei freundliche Erinnerungen, dann ist Schluss. Das ist fest eingebaut und keine Einstellung, an der jemand drehen kann.</p>
+      </div>
+      <div class="wert">
+        <h3>Die KI formuliert, der Mensch entscheidet</h3>
+        <p>Wir nehmen Ihrem Kunden das Tippen ab, nicht das Denken. In der Maske steht es wörtlich über den Vorschlägen: nur aus Ihren Angaben. Kein Satz geht raus, den nicht ein Mensch gelesen und freigegeben hat.</p>
+      </div>
+    </div>
+    <p class="schluss-werte">Wenn Sie jemanden suchen, der Ihnen in zwei Wochen fünfzig Sterne besorgt, sind wir die Falschen. Wenn Sie wollen, dass die Kunden, die Sie längst begeistert haben, es endlich auch aufschreiben, sind wir die Richtigen.</p>
+  </div>
+</section>
+
+<!-- 9 Über uns -->
+<section class="band auf" id="ueberuns">
+  <div class="wrap">
+    <div class="label">Über uns</div>
+    <h2 class="t">Zwei, die so etwas jeden Tag für andere bauen</h2>
+    <p class="vor eng">Gutwort entsteht neben unserem Hauptberuf. Wir arbeiten beide in einem inhabergeführten IT-Beratungshaus, das mittelständische und große Unternehmen bei Softwareentwicklung, Cloud-Architektur und KI-Projekten begleitet. Dort bauen wir Systeme, auf die täglich tausende Menschen angewiesen sind.</p>
+    <div class="koepfe">
+      <div class="kopfkarte">
+        <div class="portrait">Foto Timo</div>
+        <div><h3>Timo</h3><p>Full-Stack-Entwickler und KI-Experte. Verantwortet Architektur, die KI-Pipeline und den Betrieb.</p></div>
+      </div>
+      <div class="kopfkarte">
+        <div class="portrait">Foto Sascha</div>
+        <div><h3>Sascha</h3><p>Kommt aus Marketing und Frontend. Verantwortet Produkt, Oberfläche und alles, was Ihre Kunden zu sehen bekommen.</p></div>
+      </div>
+    </div>
+    <p class="vor eng" style="margin-top:2rem">Der Unterschied zu einem Werkzeug aus dem Baukasten: Wir kennen den Betrieb, für den wir es bauen, und wir kennen die Technik, die dahinter laufen muss.</p>
+  </div>
+</section>
+
+<!--
+  9b SO ARBEITEN WIR · BILDPLATZHALTER
+  Diese vier Fotos müssen echte Aufnahmen von Timo, Sascha und einem echten Kunden sein.
+  Nicht KI-erzeugt: ein Bild, das behauptet, uns mit einem Kunden zu zeigen, wäre eine
+  erfundene Szene und widerspricht dem Werte-Abschnitt dieser Seite.
+
+  Aufnahme-Hinweise für alle vier: beim Kunden im Betrieb (Werkstatt, Büro), Tageslicht,
+  Querformat 3:2, niemand schaut in die Kamera. Zu vermeiden: Händeschütteln in die Kamera,
+  Daumen hoch, drei Menschen die frontal lächeln. Seitlich und im Tun aufnehmen.
+
+  Beim Einsetzen den <img>-Tag in .szene__bild einkommentieren und den Brieftext löschen.
+-->
+<section class="band b-gruen auf" id="zusammenarbeit">
+  <div class="wrap">
+    <div class="label">So arbeiten wir</div>
+    <h2 class="t">Sie reden mit denen, die es gebaut haben</h2>
+    <p class="vor eng">Kein Ticketsystem, keine Warteschleife, kein Chatfenster mit einem Bot. Wir sind zu zweit, und Sie haben beide am Tisch.</p>
+
+    <div class="arbeit">
+      <article class="szene">
+        <div class="szene__bild">
+          <span class="szene__nr">01</span>
+          <!-- <img src="bilder/web/arbeit-erstgespraech.jpg" alt="Sascha und Timo besprechen mit einem Betriebsinhaber dessen Google-Profil"> -->
+          <span class="szene__marke">Foto fehlt · Erstgespräch</span>
+          <span class="szene__brief">Zu dritt am Tisch im Betrieb, dazwischen ein Laptop mit dem Google-Profil des Kunden. Kein Konferenzraum, kein Anzug. Blicke auf den Bildschirm, nicht in die Kamera.</span>
+        </div>
+        <div>
+          <h3>Wir schauen zuerst, wo Sie stehen</h3>
+          <p>Im ersten Gespräch geht es nicht um uns, sondern um Ihr Profil: wie viele Bewertungen Sie haben, wie alt die letzte ist, und wo der stärkste Betrieb Ihrer Stadt steht.</p>
+        </div>
+      </article>
+
+      <article class="szene">
+        <div class="szene__bild">
+          <span class="szene__nr">02</span>
+          <!-- <img src="bilder/web/arbeit-einrichtung.jpg" alt="Timo und Sascha richten gemeinsam die Maske für einen Betrieb ein"> -->
+          <span class="szene__marke">Foto fehlt · Einrichtung</span>
+          <span class="szene__brief">Timo und Sascha nebeneinander an einem Rechner, einer tippt, der andere zeigt auf den Bildschirm. Nah genug, dass man erkennt, dass hier zwei zusammenarbeiten.</span>
+        </div>
+        <div>
+          <h3>Die Einrichtung machen wir</h3>
+          <p>Logo, Farben, Ihre Leistungen, Ihre Mitarbeiter, der Einladungstext. Sie schauen einmal drüber und geben frei, den Rest übernehmen wir.</p>
+        </div>
+      </article>
+
+      <article class="szene">
+        <div class="szene__bild">
+          <span class="szene__nr">03</span>
+          <!-- <img src="bilder/web/arbeit-probelauf.jpg" alt="Ein Betriebsinhaber probiert die Bewertungsmaske auf seinem Handy aus"> -->
+          <span class="szene__marke">Foto fehlt · Probelauf</span>
+          <span class="szene__brief">Der Betriebsinhaber hält das Handy und spricht in die Maske, Timo und Sascha schauen von der Seite zu. Das wichtigste der vier Bilder: es zeigt den Moment, um den es im ganzen Produkt geht.</span>
+        </div>
+        <div>
+          <h3>Sie probieren es selbst aus</h3>
+          <p>Bevor der erste Kunde die Maske sieht, gehen Sie einmal selbst durch. Meistens ist das der Moment, in dem klar wird, warum eine Minute reicht.</p>
+        </div>
+      </article>
+
+      <article class="szene">
+        <div class="szene__bild">
+          <span class="szene__nr">04</span>
+          <!-- <img src="bilder/web/arbeit-auswertung.jpg" alt="Auswertungsgespräch: das Cockpit zeigt, welche Mitarbeiter am häufigsten gelobt werden"> -->
+          <span class="szene__marke">Foto fehlt · Auswertung</span>
+          <span class="szene__brief">Nach einigen Wochen: das Cockpit auf dem Laptop, der Inhaber sieht zum ersten Mal, wer aus seinem Team am häufigsten gelobt wird. Reaktion einfangen, nicht die Pose.</span>
+        </div>
+        <div>
+          <h3>Nach ein paar Wochen sehen wir gemeinsam nach</h3>
+          <p>Was ist herausgekommen, wer wird gelobt, worüber reden Ihre Kunden. Dieser Termin bringt meistens mehr als die Zahlen: Sie erfahren etwas über Ihren Betrieb, das vorher niemand aufgeschrieben hat.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- 10 FAQ -->
+<section class="band b-sand auf">
+  <div class="wrap">
+    <div class="label">Fragen</div>
+    <h2 class="t">Was uns oft gefragt wird</h2>
+    <div class="faq">
+      <details open><summary>Ist das nicht gekauftes Lob?</summary><p>Nein. Ihr Kunde war bei Ihnen, er sagt selbst, was er sagt, und er postet selbst. Wir nehmen ihm das Tippen ab, nicht die Meinung. Bewertungen gegen Belohnung gibt es bei uns nicht.</p></details>
+      <details><summary>Was passiert, wenn jemand schlecht bewertet?</summary><p>Dann erfahren Sie es, und zwar bevor es öffentlich steht. Kritik hat in der Maske denselben Platz wie Lob. Das ist der Teil, der Sie besser macht.</p></details>
+      <details><summary>Wie viel Arbeit habe ich damit?</summary><p>Die Einrichtung machen wir. Danach ein Blick ins Cockpit pro Woche, mehr nicht.</p></details>
+      <details><summary>Was passiert mit den Daten meiner Kunden?</summary><p>Sie bleiben Ihre. Server in Deutschland, Auftragsverarbeitungsvertrag, keine Weitergabe, keine Werbenutzung.</p></details>
+      <details><summary>Muss mein Kunde etwas installieren oder sich anmelden?</summary><p>Nein. Er tippt auf den Link oder scannt den QR-Code, und legt los. Kein Konto, keine App.</p></details>
+      <details><summary>Was kostet das?</summary><p>Das hängt von Ihrer Größe und Ihrem Kundenstamm ab. Wir sagen es Ihnen im Erstgespräch, nachdem wir uns Ihr Profil angesehen haben. Vorher wäre es geraten.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- 11 Abschluss -->
+<section class="band b-gruen auf" id="check">
+  <div class="wrap abschluss">
+    <div>
+      <div class="label">Bewertungs-Check</div>
+      <h2 class="t">Wie viele Bewertungen fehlen Ihnen?</h2>
+      <p class="vor">Wir sehen uns Ihr Google-Profil an und sagen Ihnen, wo Sie im Vergleich zum stärksten Betrieb Ihrer Stadt stehen und wie viel Potenzial in Ihrem Kundenstamm steckt. Kostenlos, und Sie gehen mit der Einschätzung raus, auch wenn Sie sich gegen uns entscheiden.</p>
+    </div>
+    <form class="formular" onsubmit="return false">
+      <div class="feld"><label for="f-name">Name</label><input id="f-name" type="text" autocomplete="name"></div>
+      <div class="feld"><label for="f-betrieb">Betrieb</label><input id="f-betrieb" type="text" autocomplete="organization"></div>
+      <div class="feld"><label for="f-profil">Google-Profil oder Ort</label><input id="f-profil" type="text" placeholder="z. B. Musterstadt oder Link zum Profil"><small>Reicht uns, um Ihr Profil zu finden.</small></div>
+      <label class="zustimmung"><input type="checkbox"><span>Ich bin einverstanden, dass meine Angaben zur Bearbeitung meiner Anfrage verarbeitet werden.</span></label>
+      <button class="btn btn-1" type="submit">Bewertungs-Check anfordern</button>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<footer class="fuss">
+  <div class="wrap fuss__in">
+    <span class="marke">Gutwort</span>
+    <span>Bewertungen von Kunden, die Sie schon haben.</span>
+    <span style="margin-left:auto;display:flex;gap:1.25rem"><a href="#">Impressum</a><a href="#">Datenschutz</a></span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var mag = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var ziele = document.querySelectorAll('.auf');
+  if(mag || !('IntersectionObserver' in window)){ ziele.forEach(function(e){e.classList.add('da');}); return; }
+  var b = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('da'); b.unobserve(e.target); } });
+  },{rootMargin:'0px 0px -8% 0px',threshold:0.05});
+  ziele.forEach(function(e){b.observe(e);});
+})();
+</script>
+</body>
+</html>
