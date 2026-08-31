@@ -10,12 +10,9 @@
 <meta property="og:image" content="bilder/web/teilen-betrieb.jpg">
 <meta property="og:type" content="website">
 <meta name="robots" content="noindex, nofollow">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap">
 <style>
-/* HINWEIS: Schriften kommen hier noch von Google. Für die Laravel-App über Bunny
-   laden oder selbst hosten, siehe design.md Abschnitt 4. */
+@font-face{font-family:"Fraunces";font-style:normal;font-weight:500 600;font-display:swap;src:url("fonts/fraunces-latin.woff2") format("woff2")}
+@font-face{font-family:"Inter";font-style:normal;font-weight:400 600;font-display:swap;src:url("fonts/inter-latin.woff2") format("woff2")}
 :root{
   --gruen-900:#12312A; --gruen-700:#1B6B4A; --gruen-500:#35A06B; --gruen-300:#9CCFB5;
   --gruen-100:#E4F2EA; --gruen-50:#F2F8F4;
@@ -1228,8 +1225,8 @@ h2.t{font-size:clamp(1.6rem,3.2vw,2.15rem);line-height:1.15}
   </div>
 </section>
 
-<!-- 11 Abschluss -->
-<section class="band b-gruen auf" id="check">
+<!-- 11 Abschluss (ausgeblendet, Kontaktformular derzeit deaktiviert) -->
+<section class="band b-gruen auf" id="check" style="display:none">
   <div class="wrap abschluss">
     <div>
       <div class="label">Bewertungs-Check</div>
@@ -1252,7 +1249,7 @@ h2.t{font-size:clamp(1.6rem,3.2vw,2.15rem);line-height:1.15}
   <div class="wrap fuss__in">
     <span class="marke">Gutwort</span>
     <span>Bewertungen von Kunden, die Sie schon haben.</span>
-    <span style="margin-left:auto;display:flex;gap:1.25rem"><a href="#">Impressum</a><a href="#">Datenschutz</a></span>
+    <span style="margin-left:auto;display:flex;gap:1.25rem"><a href="impressum.html">Impressum</a><a href="datenschutz.html">Datenschutz</a></span>
   </div>
 </footer>
 
