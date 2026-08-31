@@ -75,7 +75,7 @@ h2.t{font-size:clamp(1.6rem,3.2vw,2.15rem);line-height:1.15}
 
 /* Hero */
 .hero{padding:clamp(2.5rem,6vw,4.5rem) 0 clamp(3rem,7vw,5rem)}
-.hero__gitter{display:grid;gap:clamp(2rem,5vw,3.5rem);align-items:center}
+.hero__gitter{display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(2rem,5vw,3.5rem);align-items:center}
 @media(min-width:960px){.hero__gitter{grid-template-columns:1fr 1fr}}
 .hero h1{font-size:clamp(2.1rem,5vw,3.3rem);line-height:1.08;letter-spacing:-.015em}
 .hero .vor{font-size:1.125rem;max-width:46ch}
@@ -166,7 +166,7 @@ h2.t{font-size:clamp(1.6rem,3.2vw,2.15rem);line-height:1.15}
 .brueckensatz{margin-top:2.5rem;font-family:var(--serif);font-size:clamp(1.15rem,2.4vw,1.5rem);color:var(--gruen-700)}
 
 /* Schritte */
-.schritte{margin-top:2.5rem;display:grid;gap:1.25rem}
+.schritte{margin-top:2.5rem;display:grid;grid-template-columns:minmax(0,1fr);gap:1.25rem}
 @media(min-width:760px){.schritte{grid-template-columns:repeat(3,1fr)}}
 .schritt{background:#fff;border:2px solid var(--gruen-900);border-radius:var(--r-karte);padding:1.5rem;box-shadow:0 6px 0 var(--gruen-900)}
 .schritt__kopf{display:flex;align-items:center;gap:.85rem;margin-bottom:.9rem}
@@ -196,7 +196,7 @@ h2.t{font-size:clamp(1.6rem,3.2vw,2.15rem);line-height:1.15}
 .zahl-kachel:nth-child(3) span{color:#C4D3CC}
 
 /* Leistungen */
-.leistung{display:grid;gap:clamp(1.5rem,4vw,3rem);align-items:center;padding:clamp(1.75rem,4vw,2.5rem) 0}
+.leistung{display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(1.5rem,4vw,3rem);align-items:center;padding:clamp(1.75rem,4vw,2.5rem) 0}
 @media(min-width:900px){.leistung{grid-template-columns:1fr 1fr}.leistung--dreh .leistung__text{order:2}}
 .leistung h3{font-size:clamp(1.3rem,2.6vw,1.65rem);margin-bottom:.75rem}
 .leistung p{color:var(--grau-600)}
@@ -210,7 +210,7 @@ h2.t{font-size:clamp(1.6rem,3.2vw,2.15rem);line-height:1.15}
 .zweiter-usp{margin-top:3rem;padding-top:2.5rem;border-top:1px solid var(--grau-300)}
 
 /* Für wen */
-.waage{margin-top:2.25rem;display:grid;gap:1.25rem}
+.waage{margin-top:2.25rem;display:grid;grid-template-columns:minmax(0,1fr);gap:1.25rem}
 @media(min-width:820px){.waage{grid-template-columns:1fr 1fr}}
 .spalte{border-radius:var(--r-karte);padding:1.75rem}
 .spalte--ja{background:var(--gruen-900);color:#fff}
@@ -227,7 +227,7 @@ h2.t{font-size:clamp(1.6rem,3.2vw,2.15rem);line-height:1.15}
 .spalte li strong{display:block;color:var(--gruen-900)}
 .spalte--ja li strong{color:#fff}
 
-.branchen{margin-top:2.25rem;display:grid;gap:1.25rem}
+.branchen{margin-top:2.25rem;display:grid;grid-template-columns:minmax(0,1fr);gap:1.25rem}
 @media(min-width:640px){.branchen{grid-template-columns:repeat(2,1fr)}}
 @media(min-width:1000px){.branchen{grid-template-columns:repeat(4,1fr)}}
 .branche{background:#fff;border:2px solid var(--grau-300);border-radius:var(--r-karte);overflow:hidden;display:flex;flex-direction:column;transition:border-color .15s,transform .15s}
@@ -238,7 +238,7 @@ h2.t{font-size:clamp(1.6rem,3.2vw,2.15rem);line-height:1.15}
 .branche p{font-size:.875rem;color:var(--grau-600);line-height:1.5}
 
 /* So arbeiten wir */
-.arbeit{margin-top:2.25rem;display:grid;gap:1.5rem}
+.arbeit{margin-top:2.25rem;display:grid;grid-template-columns:minmax(0,1fr);gap:1.5rem}
 @media(min-width:820px){.arbeit{grid-template-columns:repeat(2,1fr)}}
 .szene{display:flex;flex-direction:column;gap:1rem}
 .szene__bild{
@@ -272,7 +272,7 @@ h2.t{font-size:clamp(1.6rem,3.2vw,2.15rem);line-height:1.15}
   display:flex;align-items:center;justify-content:center;
   font-size:.75rem;color:var(--grau-600);text-align:center;padding:.5rem;
 }
-.faelle{margin-top:1.5rem;display:grid;gap:1.25rem}
+.faelle{margin-top:1.5rem;display:grid;grid-template-columns:minmax(0,1fr);gap:1.25rem}
 @media(min-width:820px){.faelle{grid-template-columns:repeat(3,1fr)}}
 .fall{
   background:#fff;border:1px dashed var(--grau-300);border-radius:var(--r-karte);
@@ -296,7 +296,7 @@ h2.t{font-size:clamp(1.6rem,3.2vw,2.15rem);line-height:1.15}
 .fall__sterne{display:flex;gap:1px}
 
 /* Vertrauensband */
-.drei{margin-top:2rem;display:grid;gap:1.5rem}
+.drei{margin-top:2rem;display:grid;grid-template-columns:minmax(0,1fr);gap:1.5rem}
 @media(min-width:800px){.drei{grid-template-columns:repeat(3,1fr)}}
 .drei h3{font-size:1.125rem;margin-bottom:.5rem}
 .drei p{font-size:.9375rem;color:var(--grau-600)}
@@ -310,7 +310,7 @@ h2.t{font-size:clamp(1.6rem,3.2vw,2.15rem);line-height:1.15}
 .werteband h2,.werteband h3{color:#fff}
 .werteband .label{color:var(--gruen-500)}
 .werteband .vor{color:#C4D3CC}
-.werte{margin-top:2.25rem;display:grid;gap:1.5rem}
+.werte{margin-top:2.25rem;display:grid;grid-template-columns:minmax(0,1fr);gap:1.5rem}
 @media(min-width:820px){.werte{grid-template-columns:repeat(2,1fr)}}
 .wert{border-top:1px solid rgba(255,255,255,.18);padding-top:1.25rem}
 .wert h3{font-size:1.15rem;margin-bottom:.5rem}
@@ -318,7 +318,7 @@ h2.t{font-size:clamp(1.6rem,3.2vw,2.15rem);line-height:1.15}
 .schluss-werte{margin-top:2.5rem;font-family:var(--serif);font-size:clamp(1.1rem,2.2vw,1.35rem);color:#fff;max-width:58ch;line-height:1.4}
 
 /* Über uns */
-.koepfe{margin-top:2rem;display:grid;gap:1.5rem}
+.koepfe{margin-top:2rem;display:grid;grid-template-columns:minmax(0,1fr);gap:1.5rem}
 @media(min-width:760px){.koepfe{grid-template-columns:1fr 1fr}}
 .kopfkarte{display:flex;gap:1.15rem;align-items:flex-start}
 .portrait{width:76px;height:76px;border-radius:50%;flex:none;background:var(--sand-200);border:1px dashed var(--grau-300);display:flex;align-items:center;justify-content:center;font-size:.625rem;color:var(--grau-600);text-align:center;padding:.4rem;line-height:1.25}
@@ -335,7 +335,7 @@ h2.t{font-size:clamp(1.6rem,3.2vw,2.15rem);line-height:1.15}
 .faq p{padding:0 0 1.25rem;color:var(--grau-600);font-size:.9375rem;max-width:62ch}
 
 /* Abschluss */
-.abschluss{display:grid;gap:2.5rem;align-items:start}
+.abschluss{display:grid;grid-template-columns:minmax(0,1fr);gap:2.5rem;align-items:start}
 @media(min-width:900px){.abschluss{grid-template-columns:1fr 1fr}}
 .formular{background:#fff;border:1px solid var(--grau-300);border-radius:var(--r-gross);padding:clamp(1.5rem,3vw,2rem)}
 .feld{display:flex;flex-direction:column;gap:.35rem;margin-bottom:1.15rem}
@@ -431,7 +431,7 @@ h2.t{font-size:clamp(1.6rem,3.2vw,2.15rem);line-height:1.15}
       <h1>Gute Arbeit spricht sich herum. Mit Gutwort auch online.</h1>
       <p class="vor">Ihre Kunden sind zufrieden. Gutwort macht es ihnen leicht, das auch bei Google zu schreiben, und zeigt Ihnen, was in ihren Antworten steckt.</p>
       <div class="knoepfe">
-        <a class="btn btn-1" href="#check">Kostenlosen Bewertungs-Check anfordern</a>
+        <a class="btn btn-1" href="#check">Kostenlosen Check anfordern</a>
         <a class="btn btn-2" href="#ablauf">In 15 Minuten zeigen wir es Ihnen</a>
       </div>
       <div class="vertrauen">
